@@ -1,14 +1,13 @@
 package com.devbugger.pagery.transform;
 
+import com.devbugger.pagery.export.ExportHtml;
+import com.devbugger.pagery.site.BasePage;
 import com.devbugger.pagery.site.Page;
 import com.devbugger.pagery.site.Post;
 import com.devbugger.pagery.site.PostPage;
 import com.devbugger.pagery.transform.fontmatter.TransformFontMatter;
 import com.devbugger.pagery.transform.markdown.TransformMarkdown;
-import com.devbugger.pagery.transform.pagery.TransformPagery;
-import com.devbugger.pagery.transform.pagery.TransformPageryPage;
-import com.devbugger.pagery.transform.pagery.TransformPageryPost;
-import com.devbugger.pagery.transform.pagery.TransformPageryPostPage;
+import com.devbugger.pagery.transform.pagery.*;
 
 import java.util.List;
 
@@ -16,6 +15,8 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
     private TransformMarkdown transformMarkdown;
     private TransformFontMatter transformFontMatter;
+
+    private ExportHtml exportHtml = new ExportHtml();
 
     @Override
     public void setTransformMarkdown(TransformMarkdown transformMarkdown) {
@@ -28,8 +29,18 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     }
 
     @Override
-    public Page transformBasePage(List<Page> pages) {
-        return null;
+    public BasePage transformBasePage(String path, List<Page> pages) {
+        TransformPagery<List<Page>> transformPagery = new TransformPageryBase();
+        List<String> content = generate(path);
+
+        BasePage basePage = new BasePage(transformFontMatter.create(content));
+        content = transformFontMatter.stripFontMatter(content);
+        basePage.setContent(transformMarkdown.transform(content));
+        basePage.setContent(transformPagery.transform(basePage.getContent(), pages));
+
+        exportHtml.write(basePage.getContent(), basePage.getFontMatterMeta().getTitle());
+
+        return basePage;
     }
 
     @Override
@@ -40,6 +51,8 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
         Page page = new Page(transformFontMatter.create(content));
         page.setContent(transformMarkdown.transform(generate(path)));
         page.setContent(transformPagery.transform(page.getContent(), page));
+
+        exportHtml.write(page.getContent(), "pages/"+page.getFontMatterMeta().getTitle());
 
         return page;
     }
@@ -55,6 +68,8 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
         postPage.setContent(transformPagery.transform(postPage.getContent(), posts));
 
+        exportHtml.write(postPage.getContent(), "pages/"+postPage.getFontMatterMeta().getTitle());
+
         return postPage;
     }
 
@@ -68,6 +83,8 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
         post.setContent(transformMarkdown.transform(content));
 
         post.setContent(transformPagery.transform(post.getContent(), post));
+
+        exportHtml.write(post.getContent(), "posts/"+post.getFontMatterMeta().getTitle());
 
         return post;
     }
