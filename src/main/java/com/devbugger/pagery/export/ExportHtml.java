@@ -9,9 +9,10 @@ import java.nio.file.Paths;
 
 public class ExportHtml {
 
-    private final String file = "index.html";
+    private final static String OPERATOR = "@";
+    private final static String ROOT_DIR = "pagery-out/"+OPERATOR+".html";
 
-    public Path createFile(String name) {
+    private Path createFile(String name) {
         try {
             Files.deleteIfExists(Paths.get(name));
             return Files.createFile(Paths.get(name));
@@ -22,8 +23,9 @@ public class ExportHtml {
         return null;
     }
 
-    public void write(String content) {
-        Path path = createFile(file);
+    public void write(String content, String filePath) {
+        String pathS = ROOT_DIR.replace(OPERATOR, filePath);
+        Path path = createFile(pathS);
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             writer.write(content);
         } catch (IOException e) {
