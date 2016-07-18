@@ -1,5 +1,6 @@
 package com.devbugger.pagery.transform;
 
+import com.devbugger.pagery.site.BasePage;
 import com.devbugger.pagery.site.Page;
 import com.devbugger.pagery.site.Post;
 import com.devbugger.pagery.site.PostPage;
@@ -20,10 +21,11 @@ public interface Transformer {
     /**
      * Generate the basic layout that all pages will inherit when
      * they are created.
+     * @param path location of base page
      * @param pages to be included in the menu
      * @return a complete basic page
      */
-    Page transformBasePage(List<Page> pages);
+    BasePage transformBasePage(String path, List<Page> pages);
 
     /**
      * Transforms a page by accepting its file location.
