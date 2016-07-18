@@ -1,6 +1,22 @@
 package com.devbugger.pagery.transform.pagery;
 
+/**
+ * Contains all the markers supported in context specific
+ * Pagery markdown pages.
+ *
+ * These markers are the only valid pagery template markers
+ * Pagery will support.
+ */
 public class PageryMarkers {
+
+    /**
+     * Pagery base markers for {@link com.devbugger.pagery.site.BasePage}.
+     * These are used when generating the basic template all other will be
+     * extended from.
+     */
+    public static final String PAGERY_PAGES = "@pagery.pages";
+    public static final String PAGERY_CONTENT = "@pagery.content";
+    public static final String PAGERY_SITE_INFO = "@pagery.info";
 
     /**
      * Post wrappers.
@@ -11,8 +27,7 @@ public class PageryMarkers {
     public static final String POST_END = "@post.end";
 
     /**
-     * Post data.
-     * Tell the {@link TransformPagery} where to extract
+     * {@link com.devbugger.pagery.site.Post} data for {@link TransformPagery} where to extract
      * data at matching markers.
      */
     public static final String POST_TITLE = "@post.title";
@@ -22,12 +37,12 @@ public class PageryMarkers {
     public static final String POST_PARTIAL = "@post.partial";
 
     /**
-     * Page data.
-     * Tell the {@link TransformPagery} where to extract
+     * {@link com.devbugger.pagery.site.Page} data for {@link TransformPagery} where to extract
      * data of site content.
      */
-    public static final String PAGERY_PAGES = "@pagery.pages";
-    public static final String PAGERY_SITE_INFO = "@pagery.info";
+    public static final String PAGE_TITLE = "@page.title";
+    public static final String PAGE_DATE = "@page.date";
+
 
 
 }
