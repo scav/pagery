@@ -1,0 +1,31 @@
+
+TODO LIST PAGERY
+=================
+
+:::
+::: PageryIndex must be created pages has been created.
+::: It uses the rest of the pagery data to populate its content.
+:::
+
+1. add a fontmatter for things not *post* relared
+    e.g:
+
+    ---
+    type: page
+    ---
+
+2. parse files based on folder location
+    /posts/post1.md|post2.md|post3.md etc...
+    /pages/about.md|contact.md etc...
+    /postpage (index)
+
+3. connect files together based on metadata
+    - categories
+    - author
+    - dates(?)
+
+4. write tests for everything
+
+5. design the actual command line tool
+
+6. create "hot swap / reload" for all templates - kinda done...
