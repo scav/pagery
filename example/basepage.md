@@ -9,4 +9,4 @@ Menu: @pagery.pages
 
 @pagery.content
 
-Info: @pagery.infp
+Info: @pagery.info
