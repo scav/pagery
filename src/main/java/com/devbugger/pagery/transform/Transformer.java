@@ -18,6 +18,14 @@ public interface Transformer {
     void setTransformFontMatter(TransformFontMatter transformFontMatter);
 
     /**
+     * Generate the basic layout that all pages will inherit when
+     * they are created.
+     * @param pages to be included in the menu
+     * @return a complete basic page
+     */
+    Page transformBasePage(List<Page> pages);
+
+    /**
      * Transforms a page by accepting its file location.
      * This method takes care of everything and places the page
      * in a stack of pages that will be used to do the final transformation.

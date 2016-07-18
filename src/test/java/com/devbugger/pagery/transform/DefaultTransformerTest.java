@@ -1,6 +1,7 @@
 package com.devbugger.pagery.transform;
 
 import com.devbugger.pagery.export.ExportHtml;
+import com.devbugger.pagery.site.Page;
 import com.devbugger.pagery.site.Post;
 import com.devbugger.pagery.site.PostPage;
 import com.devbugger.pagery.transform.fontmatter.FontMatterMeta;
@@ -29,7 +30,9 @@ public class DefaultTransformerTest {
 
     @Test
     public void transformPage() throws Exception {
+        Page page = transformer.transformPage("example/page/about.md");
 
+        System.out.println(page);
     }
 
     @Test
@@ -75,4 +78,5 @@ public class DefaultTransformerTest {
         assertNotNull("Post should have font matter data", post.getFontMatterMeta());
         assertNotNull("Post should have content", post.getContent());
     }
+
 }
