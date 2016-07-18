@@ -28,11 +28,13 @@ public class TransformFontMatter {
                 ));
 
         FontMatterMeta fontMatterMeta = new FontMatterMeta();
-        fontMatterMeta.setTitle(raw.get(TITLE));
-        fontMatterMeta.setAuthor(raw.get(AUTHOR));
-        fontMatterMeta.setDateTime(LocalDateTime.parse(raw.get(DATE), DateTimeFormatter.ofPattern(DATE_TIME_PATTERN)));
-        fontMatterMeta.setType(raw.get(TYPE));
-        fontMatterMeta.setCategories(Arrays.asList(raw.get(CATEGORIES).split(CATEGORIES_SEPARATOR)));
+        fontMatterMeta.setTitle(raw.get(TITLE) != null ? raw.get(TITLE) : "");
+        fontMatterMeta.setAuthor(raw.get(AUTHOR) != null ? raw.get(AUTHOR): "");
+        if(raw.get(DATE) != null) {
+            fontMatterMeta.setDateTime(LocalDateTime.parse(raw.get(DATE), DateTimeFormatter.ofPattern(DATE_TIME_PATTERN)));
+        }
+        fontMatterMeta.setType(raw.get(TYPE) != null ? raw.get(TYPE) : "");
+        fontMatterMeta.setCategories(Arrays.asList((raw.get(CATEGORIES) != null ? raw.get(CATEGORIES) : "").split(CATEGORIES_SEPARATOR)));
 
         return fontMatterMeta;
     }
