@@ -1,11 +1,14 @@
 package com.devbugger.pagery.export;
 
 
+import com.devbugger.pagery.site.Page;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class ExportHtml {
 
@@ -32,6 +35,10 @@ public class ExportHtml {
             e.printStackTrace();
         }
 
+    }
+
+    public void write(Page page) {
+        write(page.getContent(), page.getFontMatterMeta().getType()+"/"+page.getFontMatterMeta().getTitle());
     }
 
 

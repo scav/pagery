@@ -10,6 +10,8 @@ import com.devbugger.pagery.transform.fontmatter.TransformFontMatter;
 import com.devbugger.pagery.transform.markdown.TransformMarkdown;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
+@RunWith(JUnit4.class)
 public class DefaultTransformerTest {
 
     private DefaultTransformer transformer;
@@ -86,7 +89,7 @@ public class DefaultTransformerTest {
 
     @Test
     public void transformPost() throws Exception {
-        Post post = transformer.transformPost("example/post.md");
+        Post post = transformer.transformPost("example/post/post-hello.md");
 
         ExportHtml exportHtml = new ExportHtml();
         exportHtml.write(post.getContent(), post.getFontMatterMeta().getTitle());

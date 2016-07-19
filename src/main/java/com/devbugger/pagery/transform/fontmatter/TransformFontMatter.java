@@ -2,6 +2,7 @@ package com.devbugger.pagery.transform.fontmatter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -17,11 +18,12 @@ public class TransformFontMatter {
      * @param input the entire text string to process
      * @return the populated metadata
      */
-    public FontMatterMeta create(List<String> input) {
-        int start = input.indexOf(OPEN_CLOSE);
+    public FontMatterMeta create(String input) {
+        int start = input.indexOf(OPEN_CLOSE)+OPEN_CLOSE.length();
         int end = input.lastIndexOf(OPEN_CLOSE);
 
-        Map<String, String> raw = input.subList(start+1, end).stream()
+        Map<String, String> raw = Arrays.stream(input.substring(start, end).split("\n"))
+                .filter(s -> !s.isEmpty()) // remove possible empty elements.
                 .collect(toMap(
                         key -> key.substring(0, key.indexOf(":")).trim(),
                         val -> val.substring(val.indexOf(":")+1).trim()
@@ -45,9 +47,9 @@ public class TransformFontMatter {
      * @param input a list with headers
      * @return a new list without headers
      */
-    public List<String> stripFontMatter(List<String> input) {
+    public String stripFontMatter(String input) {
         int end = input.lastIndexOf("---");
 
-        return input.subList(end+1, input.size());
+        return input.substring(end+1, input.length());
     }
 }

@@ -31,7 +31,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     @Override
     public BasePage transformBasePage(String path, List<Page> pages) {
         TransformPagery<List<Page>> transformPagery = new TransformPageryBase();
-        List<String> content = generate(path);
+        String content = generate(path);
 
         BasePage basePage = new BasePage(transformFontMatter.create(content));
         content = transformFontMatter.stripFontMatter(content);
@@ -46,13 +46,14 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     @Override
     public Page transformPage(String path) {
         TransformPagery<Page> transformPagery = new TransformPageryPage();
-        List<String> content = generate(path);
+        String content = generate(path);
 
         Page page = new Page(transformFontMatter.create(content));
-        page.setContent(transformMarkdown.transform(generate(path)));
+        content = transformFontMatter.stripFontMatter(content);
+        page.setContent(transformMarkdown.transform(content));
         page.setContent(transformPagery.transform(page.getContent(), page));
 
-        exportHtml.write(page.getContent(), "pages/"+page.getFontMatterMeta().getTitle());
+        //exportHtml.write(page.getContent(), "pages/"+page.getFontMatterMeta().getTitle());
 
         return page;
     }
@@ -60,7 +61,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     @Override
     public PostPage transformPostPage(String path, List<Post> posts) {
         TransformPagery<List<Post>> transformPagery = new TransformPageryPostPage();
-        List<String> content = generate(path);
+        String content = generate(path);
 
         PostPage postPage = new PostPage(transformFontMatter.create(content));
         content = transformFontMatter.stripFontMatter(content);
@@ -68,7 +69,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
         postPage.setContent(transformPagery.transform(postPage.getContent(), posts));
 
-        exportHtml.write(postPage.getContent(), "pages/"+postPage.getFontMatterMeta().getTitle());
+        //exportHtml.write(postPage.getContent(), "pages/"+postPage.getFontMatterMeta().getTitle());
 
         return postPage;
     }
@@ -76,7 +77,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     @Override
     public Post transformPost(String path) {
         TransformPagery<Post> transformPagery = new TransformPageryPost();
-        List<String> content = generate(path);
+        String content = generate(path);
 
         Post post = new Post(transformFontMatter.create(content));
         content = transformFontMatter.stripFontMatter(content);
@@ -84,7 +85,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
         post.setContent(transformPagery.transform(post.getContent(), post));
 
-        exportHtml.write(post.getContent(), "posts/"+post.getFontMatterMeta().getTitle());
+        //exportHtml.write(post.getContent(), "posts/"+post.getFontMatterMeta().getTitle());
 
         return post;
     }

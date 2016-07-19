@@ -1,8 +1,8 @@
 ---
-title: A demo post
+title: markdown
 author: Dag
 date: 2016-07-24 10:15:30
-type: post
+type: page
 categories: post,demo,testing
 ---
 

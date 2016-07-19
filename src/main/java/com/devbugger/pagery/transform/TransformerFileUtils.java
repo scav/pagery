@@ -13,19 +13,18 @@ import java.util.List;
 public interface TransformerFileUtils {
 
     /**
-     * Turning a path into a list of strings where each element
-     * is one line of the template.
+     * Turn a file into a string.
      * @param path to the template file
-     * @return a list representation of the file
+     * @return the string representing the file
      */
-    default List<String> generate(String path) {
-        List<String> lines = new ArrayList<>();
+    default String generate(String path) {
         try {
-            lines = Files.readAllLines(Paths.get(path));
+            return new String(Files.readAllBytes(Paths.get(path)));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return lines;
+        return null;
     }
+
 }

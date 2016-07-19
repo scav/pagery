@@ -2,30 +2,80 @@
 TODO LIST PAGERY
 =================
 
-:::
-::: PageryIndex must be created pages has been created.
-::: It uses the rest of the pagery data to populate its content.
-:::
 
-1. add a fontmatter for things not *post* relared
-    e.g:
 
-    ---
-    type: page
-    ---
+1.  Dynamic CSS tranlsation
+===========================
+    Create dynamic class names for things Pagery create
+    that can be defined in a config file.
 
-2. parse files based on folder location
-    /posts/post1.md|post2.md|post3.md etc...
-    /pages/about.md|contact.md etc...
-    /postpage (index)
+    Basically, it lets users translate common html elements
+    to a format that pagery understands. Pagery will replace its own
+    tags with the overwrite rules defined in this config.
 
-3. connect files together based on metadata
-    - categories
-    - author
-    - dates(?)
+    css-classes.configuration {
+        pagery-post-title-class = <your title class>
+        pagery-post-title-a-href-class = <your title class>
+        pagery-menu-class = <your menu class>
+    }
 
-4. write tests for everything
 
-5. design the actual command line tool
 
-6. create "hot swap / reload" for all templates - kinda done...
+2.  HTML Tag as Classes
+=======================
+    Create classes for all html elements used by Pagery.
+    These classes provide a typesafe way of adding html tags inside
+    of the transformers.
+
+    public class AHref(location: string, template.html: string)
+
+
+
+3.  parse files based on folder location
+        /posts/post1.md|post2.md|post3.md etc...
+        /pages/about.md|contact.md etc...
+        /postpage (index)
+
+
+
+4.  connect files together based on metadata
+        - categories
+        - author
+        - dates(?)
+
+
+
+5.  write tests for everything
+
+
+
+6.  Command line tool
+=====================
+    Design the actual command line tool for use by projects.
+
+    Commands to support:
+        - init (initializes an empty project with demo file and structure)
+        - export (exports a project to somewhere)
+            - host (ssh, ftp, scp)
+            - docker (creating a ngnix based docker image of the page)
+            - docker-host (pushing docker container to host)
+
+    Future commands:
+        - validate (validates the project based on html and pagery markers)
+        - backup (creates a date-name.zip of the project)
+        - init-scaffold (more advance init method)
+            -> ask to add stuff like git, bootstrap etc.
+            -> ask questions to create a basic config (if users want this)
+
+    Alternatives:
+        - One command at a time?
+        - Interactive Pagery shell
+
+
+
+7.  Exceptions
+==============
+    Create exceptions for malformed pagery / markdown
+    In order to avoid templates with errors, some elements need
+    to either provide a null check or cast exceptions when expected
+    elements are not found.

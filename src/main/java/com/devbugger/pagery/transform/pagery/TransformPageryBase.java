@@ -14,8 +14,7 @@ public class TransformPageryBase implements TransformPageryContent {
         if(input.contains(PAGERY_PAGES))
             input = input.replace(PAGERY_PAGES, menu(pages));
         if(input.contains(PAGERY_TITLE))
-            input = input.replace(PAGERY_TITLE, "Dags Blog");
-
+            input = input.replace(PAGERY_TITLE, "Dags Blog\n");
         if(input.contains(PAGERY_SITE_INFO)) {
             input = input.replace(PAGERY_SITE_INFO, "This info tag can be found in com.devbugger.pagery.transform.pagery.TransformPageryBase");
         }
@@ -34,14 +33,13 @@ public class TransformPageryBase implements TransformPageryContent {
         pages.forEach(p -> {
             String type = p.getFontMatterMeta().getType();
             String name = p.getFontMatterMeta().getTitle();
-                builder.append("<a href=\"/")
+                builder.append("\n<a href=\"/")
                     .append(type)
                     .append("/")
                     .append(name)
                     .append(".html\">")
                     .append(name)
-                    .append("</a>")
-                    .append(" \n");
+                    .append("</a>");
         });
 
         return builder.toString();

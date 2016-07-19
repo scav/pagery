@@ -12,7 +12,7 @@ import static io.undertow.Handlers.resource;
  */
 class Server {
 
-    private static String root = System.getProperty("user.home")+"/dev/pagery/";
+    private static String root = System.getProperty("user.home")+"/dev/pagery/pagery-out/";
 
     Undertow server() {
         Undertow server = Undertow.builder()
