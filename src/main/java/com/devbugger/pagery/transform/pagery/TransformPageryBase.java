@@ -1,21 +1,23 @@
 package com.devbugger.pagery.transform.pagery;
 
+import com.devbugger.pagery.site.BasePage;
 import com.devbugger.pagery.site.Page;
 
 import java.util.List;
 
-import static com.devbugger.pagery.transform.pagery.PageryMarkers.PAGERY_PAGES;
-import static com.devbugger.pagery.transform.pagery.PageryMarkers.PAGERY_SITE_INFO;
+import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
 
-public class TransformPageryBase implements TransformPagery<List<Page>> {
+public class TransformPageryBase implements TransformPageryContent {
 
     @Override
     public String transform(String input, List<Page> pages) {
         if(input.contains(PAGERY_PAGES))
             input = input.replace(PAGERY_PAGES, menu(pages));
+        if(input.contains(PAGERY_TITLE))
+            input = input.replace(PAGERY_TITLE, "Dags Blog");
 
         if(input.contains(PAGERY_SITE_INFO)) {
-            input = input.replace(PAGERY_SITE_INFO, "Pagery 2016");
+            input = input.replace(PAGERY_SITE_INFO, "This info tag can be found in com.devbugger.pagery.transform.pagery.TransformPageryBase");
         }
 
         return input;
@@ -30,10 +32,28 @@ public class TransformPageryBase implements TransformPagery<List<Page>> {
         StringBuilder builder = new StringBuilder();
 
         pages.forEach(p -> {
-                builder.append("<a href=\"/pages/"+p.getFontMatterMeta().getTitle()+".html\">"+p.getFontMatterMeta().getTitle()+"</a>")
+            String type = p.getFontMatterMeta().getType();
+            String name = p.getFontMatterMeta().getTitle();
+                builder.append("<a href=\"/")
+                    .append(type)
+                    .append("/")
+                    .append(name)
+                    .append(".html\">")
+                    .append(name)
+                    .append("</a>")
                     .append(" \n");
         });
 
         return builder.toString();
+    }
+
+    @Override
+    public String complete(BasePage basePage, Page page) {
+        if(basePage.getContent().contains(PAGERY_CONTENT)) {
+            page.setContent(basePage.getContent().replace(PAGERY_CONTENT, page.getContent()));
+
+            return page.getContent();
+        }
+        return null;
     }
 }

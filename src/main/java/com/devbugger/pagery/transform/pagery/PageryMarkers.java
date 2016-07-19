@@ -15,6 +15,7 @@ public class PageryMarkers {
      * extended from.
      */
     public static final String PAGERY_PAGES = "@pagery.pages";
+    public static final String PAGERY_TITLE = "@pagery.title";
     public static final String PAGERY_CONTENT = "@pagery.content";
     public static final String PAGERY_SITE_INFO = "@pagery.info";
 
