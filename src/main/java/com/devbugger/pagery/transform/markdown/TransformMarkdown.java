@@ -31,6 +31,9 @@ public class TransformMarkdown implements TransformerFileUtils {
             else if(line.startsWith(H6)) {
                 output.append("<h6>").append(stripMarkdown(line, H6)).append("</h6>").append("\n");
             }
+            else if(line.startsWith(NEW_LINE)) {
+                output.append("<br />").append("\n");
+            }
             else if(line.startsWith(CODE)) {
                 if(openTag) {
                     output.append(stripMarkdown(line, CODE)).append("</code>").append("\n");
@@ -44,11 +47,11 @@ public class TransformMarkdown implements TransformerFileUtils {
             }
             else if(line.startsWith(BLOCK_QUOTE)) {
                 if(openTag) {
-                    output.append(stripMarkdown(line, BLOCK_QUOTE)).append("</pre>").append("\n");
+                    output.append(stripMarkdown(line, BLOCK_QUOTE)).append("</blockquote>").append("\n");
                     //openTag = false; //close at the end of tag
                 }
                 else {
-                    output.append("<pre>").append(stripMarkdown(line, BLOCK_QUOTE)).append("\n");
+                    output.append("<blockquote>").append(stripMarkdown(line, BLOCK_QUOTE)).append("\n");
                     openTag = true; //opens the tag
                 }
             }
