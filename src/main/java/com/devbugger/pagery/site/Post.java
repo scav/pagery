@@ -9,27 +9,12 @@ import com.devbugger.pagery.transform.fontmatter.FontMatterMeta;
  */
 public class Post extends Page {
 
-    private FontMatterMeta fontMatterMeta;
-
     public Post() {
+
     }
 
     public Post(FontMatterMeta fontMatterMeta) {
-        this.fontMatterMeta = fontMatterMeta;
+        super(fontMatterMeta);
     }
 
-    public FontMatterMeta getFontMatterMeta() {
-        return fontMatterMeta;
-    }
-
-    public void setFontMatterMeta(FontMatterMeta fontMatterMeta) {
-        this.fontMatterMeta = fontMatterMeta;
-    }
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "fontMatterMeta=" + fontMatterMeta +
-                "} " + super.toString();
-    }
 }
