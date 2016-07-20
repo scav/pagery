@@ -80,7 +80,7 @@ public class DefaultTransformerTest {
         post2.setContent("Second post is very exiting. It contains things that are seconds.");
         posts.add(post2);
 
-        PostPage postPage = transformer.transformPostPage("postpage.md", posts);
+        PostPage postPage = transformer.transformPostPage("example/postpage.md", posts);
 
         System.out.println(postPage);
 
