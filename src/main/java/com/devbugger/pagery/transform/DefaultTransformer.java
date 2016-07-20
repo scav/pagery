@@ -1,6 +1,5 @@
 package com.devbugger.pagery.transform;
 
-import com.devbugger.pagery.export.ExportHtml;
 import com.devbugger.pagery.site.BasePage;
 import com.devbugger.pagery.site.Page;
 import com.devbugger.pagery.site.Post;
@@ -15,8 +14,6 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
     private TransformMarkdown transformMarkdown;
     private TransformFontMatter transformFontMatter;
-
-    private ExportHtml exportHtml = new ExportHtml();
 
     @Override
     public void setTransformMarkdown(TransformMarkdown transformMarkdown) {
@@ -38,8 +35,6 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
         basePage.setContent(transformMarkdown.transform(content));
         basePage.setContent(transformPagery.transform(basePage.getContent(), pages));
 
-        exportHtml.write(basePage.getContent(), basePage.getFontMatterMeta().getTitle());
-
         return basePage;
     }
 
@@ -52,8 +47,6 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
         content = transformFontMatter.stripFontMatter(content);
         page.setContent(transformMarkdown.transform(content));
         page.setContent(transformPagery.transform(page.getContent(), page));
-
-        //exportHtml.write(page.getContent(), "pages/"+page.getFontMatterMeta().getTitle());
 
         return page;
     }
@@ -69,8 +62,6 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
         postPage.setContent(transformPagery.transform(postPage.getContent(), posts));
 
-        //exportHtml.write(postPage.getContent(), "pages/"+postPage.getFontMatterMeta().getTitle());
-
         return postPage;
     }
 
@@ -84,8 +75,6 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
         post.setContent(transformMarkdown.transform(content));
 
         post.setContent(transformPagery.transform(post.getContent(), post));
-
-        //exportHtml.write(post.getContent(), "posts/"+post.getFontMatterMeta().getTitle());
 
         return post;
     }

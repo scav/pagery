@@ -3,7 +3,9 @@ package com.devbugger.pagery.transform.pagery;
 import com.devbugger.pagery.site.BasePage;
 import com.devbugger.pagery.site.Page;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
 
@@ -16,7 +18,8 @@ public class TransformPageryBase implements TransformPageryContent {
         if(input.contains(PAGERY_TITLE))
             input = input.replace(PAGERY_TITLE, "Dags Blog\n");
         if(input.contains(PAGERY_SITE_INFO)) {
-            input = input.replace(PAGERY_SITE_INFO, "This info tag can be found in com.devbugger.pagery.transform.pagery.TransformPageryBase");
+            input = input.replace(PAGERY_SITE_INFO, "Created @ "+LocalDateTime.now().toString() + "<br />" +
+                    "This info tag can be found in com.devbugger.pagery.transform.pagery.TransformPageryBase");
         }
 
         return input;
@@ -29,6 +32,9 @@ public class TransformPageryBase implements TransformPageryContent {
      */
     public String menu(List<Page> pages) {
         StringBuilder builder = new StringBuilder();
+
+        // Sort the menu alphabetically
+        pages.sort((p1, p2) -> p1.getFontMatterMeta().getTitle().compareTo(p2.getFontMatterMeta().getTitle()));
 
         pages.forEach(p -> {
             String type = p.getFontMatterMeta().getType();
