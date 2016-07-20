@@ -2,14 +2,17 @@ package com.devbugger.pagery.export;
 
 
 import com.devbugger.pagery.site.Page;
+import com.devbugger.pagery.site.PostPage;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
+/**
+ * Dummy export implementation for running unit tests.
+ */
 public class ExportHtml {
 
     private final static String OPERATOR = "@";
@@ -17,6 +20,11 @@ public class ExportHtml {
 
     private Path createFile(String name) {
         try {
+            // Create all files for testing purposes.
+            Files.createDirectories(Paths.get("pagery-out"));
+            Files.createDirectories(Paths.get("pagery-out/page"));
+            Files.createDirectories(Paths.get("pagery-out/post"));
+            Files.createDirectories(Paths.get("pagery-out/postpage"));
             Files.deleteIfExists(Paths.get(name));
             return Files.createFile(Paths.get(name));
         } catch (IOException e) {
@@ -38,6 +46,9 @@ public class ExportHtml {
     }
 
     public void write(Page page) {
+        if(page instanceof PostPage) {
+            write(page.getContent(), "index");
+        }
         write(page.getContent(), page.getFontMatterMeta().getType()+"/"+page.getFontMatterMeta().getTitle());
     }
 
