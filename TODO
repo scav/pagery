@@ -65,7 +65,7 @@ TODO LIST PAGERY
         - backup (creates a date-name.zip of the project)
         - init-scaffold (more advance init method)
             -> ask to add stuff like git, bootstrap etc.
-            -> ask questions to create a basic config (if users want this)
+            -> ask questions to create a basic config (if users want this)
 
     Alternatives:
         - One command at a time?
