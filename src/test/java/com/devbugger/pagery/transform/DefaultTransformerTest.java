@@ -37,8 +37,8 @@ public class DefaultTransformerTest {
         List<Page> pages = new ArrayList<>();
 
         //Create some pages to help create the menu.
-        pages.add(transformer.transformPage("example/pages/about.md"));
-        pages.add(transformer.transformPage("example/pages/contact.md"));
+        pages.add(transformer.transformPage("example/page/about.md"));
+        pages.add(transformer.transformPage("example/page/contact.md"));
 
         BasePage p = transformer.transformBasePage("example/basepage.md", pages);
 
@@ -49,7 +49,7 @@ public class DefaultTransformerTest {
 
     @Test
     public void transformPage() throws Exception {
-        Page page = transformer.transformPage("example/pages/about.md");
+        Page page = transformer.transformPage("example/page/about.md");
 
         System.out.println(page);
     }

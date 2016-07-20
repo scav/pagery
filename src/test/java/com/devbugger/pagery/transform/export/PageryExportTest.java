@@ -41,14 +41,12 @@ public class PageryExportTest {
         List<Page> pages = new ArrayList<>();
 
         posts.add(transformer.transformPost("example/post/post-hello.md"));
-        posts.add(transformer.transformPost("example/post/post-status.md"));
         posts.add(transformer.transformPost("example/post/post-pagery.md"));
         PostPage postPage = transformer.transformPostPage("example/postpage.md", posts);
         pages.add(postPage);
 
         pages.add(transformer.transformPage("example/page/about.md"));
         pages.add(transformer.transformPage("example/page/contact.md"));
-        pages.add(transformer.transformPage("example/page/markdown.md"));
 
         BasePage basePage = transformer.transformBasePage("example/basepage.md", pages);
 
