@@ -2,10 +2,7 @@ package com.devbugger.pagery.transform.fontmatter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.devbugger.pagery.transform.fontmatter.FontMatter.*;
 import static java.util.stream.Collectors.toMap;
@@ -20,7 +17,7 @@ public class TransformFontMatter {
      */
     public FontMatterMeta create(String input) {
         int start = input.indexOf(OPEN_CLOSE)+OPEN_CLOSE.length();
-        int end = input.lastIndexOf(OPEN_CLOSE);
+        int end = openCloseEndIndex(input);
 
         Map<String, String> raw = Arrays.stream(input.substring(start, end).split("\n"))
                 .filter(s -> !s.isEmpty()) // remove possible empty elements.
@@ -43,13 +40,33 @@ public class TransformFontMatter {
 
     /**
      * Strip the --- content --- based font matter headers from
-     * the list before processing it further.
+     * the input string by splitting the line after the first ---.
      * @param input a list with headers
      * @return a new list without headers
      */
     public String stripFontMatter(String input) {
-        int end = input.lastIndexOf("---");
+        String endLine = "---";
 
-        return input.substring(end+1, input.length());
+        if(input.startsWith(endLine)) {
+            return input.substring(
+                    openCloseEndIndex(input)+OPEN_CLOSE.length(),
+                    input.length());
+        }
+
+        return input;
+    }
+
+    int openCloseEndIndex(String input) {
+        int index = input.indexOf(OPEN_CLOSE);
+        int counter = 0;
+        while (index >= 0) {
+            counter++;
+            if(counter == 2) {
+                break;
+            }
+            index = input.indexOf(OPEN_CLOSE, index +1);
+        }
+
+        return index;
     }
 }
