@@ -35,7 +35,8 @@ public class PageryMarkers {
     public static final String POST_AUTHOR = "@post.author";
     public static final String POST_DATE = "@post.date";
     public static final String POST_CATEGORIES = "@post.categories";
-    public static final String POST_PARTIAL = "@post.partial";
+    public static final String POST_PARTIAL = "@post.lead.partial";
+    public static final String POST_LEAD_PARAGRAPH = "@post.lead";
 
     /**
      * {@link com.devbugger.pagery.site.Page} data for {@link TransformPagery} where to extract

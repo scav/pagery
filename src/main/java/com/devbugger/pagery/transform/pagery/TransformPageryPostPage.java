@@ -26,7 +26,16 @@ public class TransformPageryPostPage implements TransformPagery<List<Post>> {
                 String output = input.substring(indexPre, input.indexOf(POST_END));
 
                 // Append to content for each iteration
-                content.append(new TransformPageryPost().transform(output, p));
+                output = new TransformPageryPost().transform(output, p);
+                if(output.contains(POST_PARTIAL) && p.getContent().contains(POST_LEAD_PARAGRAPH)) {
+                    String leadParagraph = p.getContent().substring(
+                            p.getContent().indexOf(POST_LEAD_PARAGRAPH),
+                            p.getContent().lastIndexOf(POST_LEAD_PARAGRAPH));
+                    output = output.replace(POST_PARTIAL,
+                            leadParagraph);
+                    output = output.replace(POST_LEAD_PARAGRAPH, "");
+                }
+            content.append(output);
         });
 
         content.append(post);
