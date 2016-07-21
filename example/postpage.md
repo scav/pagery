@@ -9,5 +9,5 @@ info: this is the page containing all posts
 @post.all
 ## @post.title
 written by @post.author @ @post.date
-@post.lead.partial
+@post.lead
 @post.end

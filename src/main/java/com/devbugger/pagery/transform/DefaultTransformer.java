@@ -67,14 +67,14 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
     @Override
     public Post transformPost(String path) {
-        TransformPagery<Post> transformPagery = new TransformPageryPost();
+        TransformPageryPost transformPagery = new TransformPageryPost();
         String content = generate(path);
 
         Post post = new Post(transformFontMatter.create(content));
         content = transformFontMatter.stripFontMatter(content);
         post.setContent(transformMarkdown.transform(content));
 
-        post.setContent(transformPagery.transform(post.getContent(), post));
+        post = transformPagery.transform(post);
 
         return post;
     }

@@ -11,4 +11,5 @@ public interface TransformPagery<T> {
      */
     String transform(String input, T data);
 
+
 }

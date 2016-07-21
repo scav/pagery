@@ -10,13 +10,13 @@ categories: post,first
 by @post.author @ @post.date
 in @post.categories
 
-@post.lead
+@post.lead.start
 Hello world!
 
 This is the lead part of the post
-@post.lead
+@post.lead.end
 
-This is no longer part of the head..
+This is no longer part of the head.
 
 
 

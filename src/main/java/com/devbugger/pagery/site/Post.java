@@ -9,6 +9,8 @@ import com.devbugger.pagery.transform.fontmatter.FontMatterMeta;
  */
 public class Post extends Page {
 
+    private String leadPargraph;
+
     public Post() {
 
     }
@@ -17,4 +19,18 @@ public class Post extends Page {
         super(fontMatterMeta);
     }
 
+    public String getLeadPargraph() {
+        return leadPargraph;
+    }
+
+    public void setLeadPargraph(String leadPargraph) {
+        this.leadPargraph = leadPargraph;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "leadPargraph='" + leadPargraph + '\'' +
+                "} " + super.toString();
+    }
 }
