@@ -9,20 +9,24 @@ import java.util.stream.Collectors;
 
 import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
 
-public class TransformPageryBase implements TransformPageryContent {
+public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<BasePage, List<Page>> {
 
     @Override
-    public String transform(String input, List<Page> pages) {
+    public BasePage transform(BasePage basePage, List<Page> pages) {
+        String input = basePage.getContent();
+
         if(input.contains(PAGERY_PAGES))
             input = input.replace(PAGERY_PAGES, menu(pages));
         if(input.contains(PAGERY_TITLE))
             input = input.replace(PAGERY_TITLE, "Dags Blog\n");
         if(input.contains(PAGERY_SITE_INFO)) {
             input = input.replace(PAGERY_SITE_INFO, "Created @ "+LocalDateTime.now().toString() + "<br />" +
-                    "This info tag can be found in com.devbugger.pagery.transform.pagery.TransformPageryBase");
+                    "This info tag can be found in com.devbugger.pagery.transform.pagery.TransformPageryBaseBageImpl");
         }
 
-        return input;
+        basePage.setContent(input);
+
+        return basePage;
     }
 
     /**
@@ -52,12 +56,13 @@ public class TransformPageryBase implements TransformPageryContent {
     }
 
     @Override
-    public String complete(BasePage basePage, Page page) {
+    public Page attach(BasePage basePage, Page page) {
         if(basePage.getContent().contains(PAGERY_CONTENT)) {
             page.setContent(basePage.getContent().replace(PAGERY_CONTENT, page.getContent()));
 
-            return page.getContent();
+            return page;
         }
         return null;
     }
+
 }

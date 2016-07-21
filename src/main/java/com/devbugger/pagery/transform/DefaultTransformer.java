@@ -10,6 +10,11 @@ import com.devbugger.pagery.transform.pagery.*;
 
 import java.util.List;
 
+/**
+ * Default transformer implementation.
+ *
+ * This class exposes all available functionality outside of its package.
+ */
 public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
     private TransformMarkdown transformMarkdown;
@@ -27,15 +32,14 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
     @Override
     public BasePage transformBasePage(String path, List<Page> pages) {
-        TransformPagery<List<Page>> transformPagery = new TransformPageryBase();
+        TransformPageryBasePage<BasePage, List<Page>> transformPagery = new DefaultTransformPageryBaseBage();
         String content = generate(path);
 
         BasePage basePage = new BasePage(transformFontMatter.create(content));
         content = transformFontMatter.stripFontMatter(content);
         basePage.setContent(transformMarkdown.transform(content));
-        basePage.setContent(transformPagery.transform(basePage.getContent(), pages));
 
-        return basePage;
+        return transformPagery.transform(basePage, pages);
     }
 
     @Override
@@ -46,23 +50,20 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
         Page page = new Page(transformFontMatter.create(content));
         content = transformFontMatter.stripFontMatter(content);
         page.setContent(transformMarkdown.transform(content));
-        page.setContent(transformPagery.transform(page.getContent(), page));
 
-        return page;
+        return transformPagery.transform(page);
     }
 
     @Override
     public PostPage transformPostPage(String path, List<Post> posts) {
-        TransformPagery<List<Post>> transformPagery = new TransformPageryPostPage();
+        TransformPageryPostPage<PostPage, List<Post>> transformPagery = new DefaultTransformPageryPostPage();
         String content = generate(path);
 
         PostPage postPage = new PostPage(transformFontMatter.create(content));
         content = transformFontMatter.stripFontMatter(content);
         postPage.setContent(transformMarkdown.transform(content));
 
-        postPage.setContent(transformPagery.transform(postPage.getContent(), posts));
-
-        return postPage;
+        return transformPagery.transform(postPage, posts);
     }
 
     @Override

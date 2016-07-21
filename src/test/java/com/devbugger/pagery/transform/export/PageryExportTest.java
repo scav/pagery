@@ -9,8 +9,8 @@ import com.devbugger.pagery.site.PostPage;
 import com.devbugger.pagery.transform.DefaultTransformer;
 import com.devbugger.pagery.transform.fontmatter.TransformFontMatter;
 import com.devbugger.pagery.transform.markdown.TransformMarkdown;
-import com.devbugger.pagery.transform.pagery.TransformPageryBase;
-import com.devbugger.pagery.transform.pagery.TransformPageryContent;
+import com.devbugger.pagery.transform.pagery.DefaultTransformPageryBaseBage;
+import com.devbugger.pagery.transform.pagery.TransformPageryBasePage;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,8 +56,8 @@ public class PageryExportTest {
         allPages.addAll(posts);
 
         // Add the surrounding page content with the base page
-        TransformPageryContent base = new TransformPageryBase();
-        allPages.forEach(p -> p.setContent(base.complete(basePage, p)));
+        TransformPageryBasePage<BasePage, List<Page>> base = new DefaultTransformPageryBaseBage();
+        allPages.forEach(p -> p = base.attach(basePage, p));
 
         // Write all pages to disk
         ExportHtml exportHtml = new ExportHtml();
