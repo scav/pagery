@@ -20,7 +20,6 @@ import java.util.List;
 /**
  * Class responsible for generating the pages in the project directory.
  *
- * // DENNE MÅ DU GJØRE FERDIG! DEN SKAL STØTTE ALL FUNKSJONALITET
  */
 public class GeneratePages {
 
