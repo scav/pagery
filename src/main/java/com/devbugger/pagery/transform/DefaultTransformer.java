@@ -1,9 +1,6 @@
 package com.devbugger.pagery.transform;
 
-import com.devbugger.pagery.site.BasePage;
-import com.devbugger.pagery.site.Page;
-import com.devbugger.pagery.site.Post;
-import com.devbugger.pagery.site.PostPage;
+import com.devbugger.pagery.site.*;
 import com.devbugger.pagery.transform.fontmatter.TransformFontMatter;
 import com.devbugger.pagery.transform.markdown.TransformMarkdown;
 import com.devbugger.pagery.transform.pagery.*;
@@ -28,6 +25,18 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     @Override
     public void setTransformFontMatter(TransformFontMatter transformFontMatter) {
         this.transformFontMatter = transformFontMatter;
+    }
+
+    @Override
+    public IndexPage transformIndexPage(String path, List<Post> posts) {
+        TransformPageryWithResources<IndexPage, List<Post>> transformPagery = new TransformPageryIndexPage();
+        String content = generate(path);
+
+        IndexPage indexPage = new IndexPage(transformFontMatter.create(content));
+        content = transformFontMatter.stripFontMatter(content);
+        indexPage.setContent(transformMarkdown.transform(content));
+
+        return transformPagery.transform(indexPage, posts);
     }
 
     @Override
@@ -56,7 +65,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
     @Override
     public PostPage transformPostPage(String path, List<Post> posts) {
-        TransformPageryPostPage<PostPage, List<Post>> transformPagery = new DefaultTransformPageryPostPage();
+        TransformPageryWithResources<PostPage, List<Post>> transformPagery = new TransformPageryPostPage();
         String content = generate(path);
 
         PostPage postPage = new PostPage(transformFontMatter.create(content));

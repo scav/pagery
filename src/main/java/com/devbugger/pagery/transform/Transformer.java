@@ -1,9 +1,6 @@
 package com.devbugger.pagery.transform;
 
-import com.devbugger.pagery.site.BasePage;
-import com.devbugger.pagery.site.Page;
-import com.devbugger.pagery.site.Post;
-import com.devbugger.pagery.site.PostPage;
+import com.devbugger.pagery.site.*;
 import com.devbugger.pagery.transform.fontmatter.TransformFontMatter;
 import com.devbugger.pagery.transform.markdown.TransformMarkdown;
 
@@ -17,6 +14,9 @@ import java.util.List;
 public interface Transformer {
     void setTransformMarkdown(TransformMarkdown transformMarkdown);
     void setTransformFontMatter(TransformFontMatter transformFontMatter);
+
+
+    IndexPage transformIndexPage(String path, List<Post> posts);
 
     /**
      * Generate the basic layout that all pages will inherit when
