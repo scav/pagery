@@ -1,19 +1,20 @@
 package com.devbugger.pagery.transform.pagery;
 
+import com.devbugger.pagery.site.IndexPage;
 import com.devbugger.pagery.site.Post;
-import com.devbugger.pagery.site.PostPage;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
-import static com.devbugger.pagery.transform.pagery.TransformPageryPost.CATEGORY_SEPARATOR;
 
-public class TransformPageryPostPage implements TransformPageryWithResources<PostPage, List<Post>> {
+public class TransformPageryIndexPage implements TransformPageryWithResources<IndexPage, List<Post>> {
+
+    private final int POST_LIMIT = 1;
 
     @Override
-    public PostPage transform(PostPage postPage, List<Post> posts) {
-        String input = postPage.getContent();
+    public IndexPage transform(IndexPage indexPage, List<Post> posts) {
+        String input = indexPage.getContent();
 
         // Set up indexes for pre and post markers
         int indexPre = input.indexOf(POST_ALL)+POST_ALL.length();
@@ -26,7 +27,7 @@ public class TransformPageryPostPage implements TransformPageryWithResources<Pos
         StringBuilder content = new StringBuilder();
         content.append(pre);
 
-        posts.forEach(p -> {
+        posts.stream().limit(POST_LIMIT).collect(Collectors.toList()).forEach(p -> {
             // Create a copy of the content between the markers.
             String output = input.substring(indexPre, input.indexOf(POST_END));
 
@@ -42,9 +43,9 @@ public class TransformPageryPostPage implements TransformPageryWithResources<Pos
 
         });
 
-        postPage.setContent(content.toString());
+        indexPage.setContent(content.toString());
 
-        return postPage;
+        return indexPage;
     }
 
 }

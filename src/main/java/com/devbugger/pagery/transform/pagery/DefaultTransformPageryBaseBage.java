@@ -18,7 +18,7 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
         if(input.contains(PAGERY_PAGES))
             input = input.replace(PAGERY_PAGES, menu(pages));
         if(input.contains(PAGERY_TITLE))
-            input = input.replace(PAGERY_TITLE, "Dags Blog\n");
+            input = input.replace(PAGERY_TITLE, "<a href=\"/\">Dags Blog</a>\n");
         if(input.contains(PAGERY_SITE_INFO)) {
             input = input.replace(PAGERY_SITE_INFO, "Created @ "+LocalDateTime.now().toString() + "<br />" +
                     "This info tag can be found in com.devbugger.pagery.transform.pagery.TransformPageryBaseBageImpl");

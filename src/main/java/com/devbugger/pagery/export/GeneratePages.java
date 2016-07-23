@@ -1,9 +1,6 @@
 package com.devbugger.pagery.export;
 
-import com.devbugger.pagery.site.BasePage;
-import com.devbugger.pagery.site.Page;
-import com.devbugger.pagery.site.Post;
-import com.devbugger.pagery.site.PostPage;
+import com.devbugger.pagery.site.*;
 import com.devbugger.pagery.transform.DefaultTransformer;
 import com.devbugger.pagery.transform.fontmatter.TransformFontMatter;
 import com.devbugger.pagery.transform.markdown.TransformMarkdown;
@@ -33,6 +30,7 @@ public class GeneratePages {
     private final Path pageDir;
 
     private List<Page> pages = new ArrayList<>();
+    private IndexPage indexPage;
     private PostPage postPage;
     private BasePage basePage;
 
@@ -76,17 +74,21 @@ public class GeneratePages {
             e.printStackTrace();
         }
 
-        postPage = transformer.transformPostPage("example/index.md", posts);
-        pages.add(postPage);
-
+        indexPage = transformer.transformIndexPage("example/index.md", posts);
+        postPage = transformer.transformPostPage("example/page/post.md", posts);
         basePage = transformer.transformBasePage("example/basepage.md", pages);
+
+        //Combine all page files
+        pages.add(postPage);
         pages.addAll(posts);
 
         TransformPageryBasePage<BasePage, List<Page>> base = new DefaultTransformPageryBaseBage();
+        base.attach(basePage, indexPage);
         pages.forEach(p -> p = base.attach(basePage, p));
 
         ExportHtml exportHtml = new ExportHtml();
         pages.forEach(exportHtml::write);
+        exportHtml.write(indexPage);
     }
 
     public List<Page> getPages() {

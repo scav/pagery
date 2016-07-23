@@ -1,6 +1,7 @@
 package com.devbugger.pagery.export;
 
 
+import com.devbugger.pagery.site.IndexPage;
 import com.devbugger.pagery.site.Page;
 import com.devbugger.pagery.site.PostPage;
 
@@ -46,12 +47,10 @@ public class ExportHtml {
     }
 
     public void write(Page page) {
-        if(page instanceof PostPage) {
+        if(page instanceof IndexPage) {
             write(page.getContent(), "index");
         }
         write(page.getContent(), page.getFontMatterMeta().getType()+"/"+page.getFontMatterMeta().getTitle());
     }
-
-
 
 }

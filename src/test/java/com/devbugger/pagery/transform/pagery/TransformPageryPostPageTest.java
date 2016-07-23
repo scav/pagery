@@ -10,13 +10,13 @@ import org.junit.runners.JUnit4;
 import java.util.List;
 
 @RunWith(JUnit4.class)
-public class DefaultTransformPageryPostPageTest {
+public class TransformPageryPostPageTest {
 
-    private TransformPageryPostPage<PostPage, List<Post>> transformPagery;
+    private TransformPageryWithResources<PostPage, List<Post>> transformPagery;
 
     @Before
     public void setup() {
-        transformPagery = new DefaultTransformPageryPostPage();
+        transformPagery = new TransformPageryPostPage();
     }
 
     @Test
