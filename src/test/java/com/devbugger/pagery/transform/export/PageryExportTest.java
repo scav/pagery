@@ -2,6 +2,7 @@ package com.devbugger.pagery.transform.export;
 
 
 import com.devbugger.pagery.export.ExportHtml;
+import com.devbugger.pagery.export.GeneratePages;
 import com.devbugger.pagery.site.BasePage;
 import com.devbugger.pagery.site.Page;
 import com.devbugger.pagery.site.Post;
@@ -63,6 +64,11 @@ public class PageryExportTest {
         ExportHtml exportHtml = new ExportHtml();
         allPages.forEach(exportHtml::write);
 
+    }
+
+    @Test
+    public void initializeData() throws Exception {
+        GeneratePages generatePages = new GeneratePages("post", "page");
     }
 
 }

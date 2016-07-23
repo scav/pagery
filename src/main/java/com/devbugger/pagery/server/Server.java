@@ -12,12 +12,14 @@ import static io.undertow.Handlers.resource;
  */
 class Server {
 
-    private static String root = System.getProperty("user.home")+"/dev/pagery/pagery-out/";
+    private static String FILE_ROOT = System.getProperty("user.home")+"/dev/pagery/pagery-out/";
+    private static int PORT = 8080;
+    private static String HOST = "localhost";
 
     Undertow server() {
         Undertow server = Undertow.builder()
-                .addHttpListener(8080, "localhost")
-                .setHandler(resource(new PathResourceManager(Paths.get(root), 100))
+                .addHttpListener(PORT, HOST)
+                .setHandler(resource(new PathResourceManager(Paths.get(FILE_ROOT), 100))
                         .setDirectoryListingEnabled(true)
                 )
                 .build();

@@ -7,34 +7,86 @@ import com.devbugger.pagery.site.PostPage;
 import com.devbugger.pagery.transform.DefaultTransformer;
 import com.devbugger.pagery.transform.fontmatter.TransformFontMatter;
 import com.devbugger.pagery.transform.markdown.TransformMarkdown;
+import com.devbugger.pagery.transform.pagery.DefaultTransformPageryBaseBage;
+import com.devbugger.pagery.transform.pagery.TransformPageryBasePage;
 
+import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Utility class for generating lists of all the resources
- * that will be exported.
+ * Class responsible for generating the pages in the project directory.
+ *
+ * // DENNE MÅ DU GJØRE FERDIG! DEN SKAL STØTTE ALL FUNKSJONALITET
  */
 public class GeneratePages {
 
     private final DefaultTransformer transformer;
+    private String root = "/Users/dag/dev/pagery/example/";
+    private final Path postDir;
+    private final Path pageDir;
 
-    private List<Post> posts;
-    private List<Page> pages;
+    private List<Page> pages = new ArrayList<>();
     private PostPage postPage;
     private BasePage basePage;
 
-    public GeneratePages() {
+    public GeneratePages(String postDir, String pageDir) {
+        this.pageDir = Paths.get(root+pageDir);
+        this.postDir = Paths.get(root+postDir);
+
         transformer = new DefaultTransformer();
         transformer.setTransformFontMatter(new TransformFontMatter());
         transformer.setTransformMarkdown(new TransformMarkdown());
+
+        //initializeData(root);
+
+        init();
+
     }
 
-    public DefaultTransformer getTransformer() {
-        return transformer;
-    }
+    /**
+     * Find existing files and write the to the project folder.
+     */
+    private void init() {
+        List<Post> posts = new ArrayList<>();
 
-    public List<Post> getPosts() {
-        return posts;
+        try (DirectoryStream<Path> postStream = Files.newDirectoryStream(postDir, "*.md")) {
+            postStream.forEach(post -> {
+                posts.add(transformer.transformPost(post.toAbsolutePath().toString()));
+            });
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (DirectoryStream<Path> pageStream = Files.newDirectoryStream(pageDir, "*.md")) {
+            pageStream.forEach(post -> {
+                pages.add(transformer.transformPage(post.toAbsolutePath().toString()));
+            });
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        postPage = transformer.transformPostPage("example/index.md", posts);
+        pages.add(postPage);
+
+        basePage = transformer.transformBasePage("example/basepage.md", pages);
+        pages.addAll(posts);
+
+        TransformPageryBasePage<BasePage, List<Page>> base = new DefaultTransformPageryBaseBage();
+        pages.forEach(p -> p = base.attach(basePage, p));
+
+        ExportHtml exportHtml = new ExportHtml();
+        pages.forEach(exportHtml::write);
     }
 
     public List<Page> getPages() {

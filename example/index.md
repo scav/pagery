@@ -1,5 +1,5 @@
 ---
-title: Posts
+title: index
 type: postpage
 author: Dag
 date: 2016-07-24 10:15:30
