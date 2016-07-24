@@ -6,24 +6,24 @@ import com.devbugger .pagery.site.Page;
 
 import java.util.List;
 
-public interface TransformPageryBasePage<T,S> {
+public interface TransformPageryBasePage<T, S> {
 
     /**
      * Transform the content within a template based on the occurrence
      * of markers defined in {@link PageryMarkers}
      * @param t the page type
-     * @param s the input data
+     * @param s list of input data
      * @param config active configuration file
      * @return the transformed html as S
      */
-    T transform(Config config, T t, S s);
+    T transform(Config config, T t, List<S> s);
 
     /**
      * Generate the menu from from input.
-     * @param s all transformed pages
+     * @param s contains all transformed pages
      * @return the html formatted menu
      */
-    String menu(S s);
+    String menu(List<S> s);
 
      /**
      *  This is a specialized, non-genric method for attaching

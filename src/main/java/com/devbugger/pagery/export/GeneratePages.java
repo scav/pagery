@@ -74,7 +74,7 @@ public class GeneratePages {
         pages.add(postPage);
         pages.addAll(posts);
 
-        TransformPageryBasePage<BasePage, List<Page>> base = new DefaultTransformPageryBaseBage();
+        TransformPageryBasePage<BasePage, Page> base = new DefaultTransformPageryBaseBage();
         base.attach(basePage, indexPage);
         pages.forEach(p -> p = base.attach(basePage, p));
 

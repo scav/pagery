@@ -9,7 +9,7 @@ import java.util.List;
 
 import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
 
-public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<BasePage, List<Page>> {
+public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<BasePage, Page> {
 
     @Override
     public BasePage transform(Config config, BasePage basePage, List<Page> pages) {

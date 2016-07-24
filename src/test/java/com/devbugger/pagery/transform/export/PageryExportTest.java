@@ -60,7 +60,7 @@ public class PageryExportTest {
         allPages.addAll(posts);
 
         // Add the surrounding page content with the base page
-        TransformPageryBasePage<BasePage, List<Page>> base = new DefaultTransformPageryBaseBage();
+        TransformPageryBasePage<BasePage, Page> base = new DefaultTransformPageryBaseBage();
         allPages.forEach(p -> p = base.attach(basePage, p));
 
         // Write all pages to disk
