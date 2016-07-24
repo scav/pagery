@@ -5,6 +5,7 @@ public class Project {
     private String title;
     private String path;
     private String info;
+    private int postlimit;
 
     public String getTitle() {
         return title;
@@ -30,12 +31,21 @@ public class Project {
         this.info = info;
     }
 
+    public int getPostlimit() {
+        return postlimit;
+    }
+
+    public void setPostlimit(int postlimit) {
+        this.postlimit = postlimit;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
                 "title='" + title + '\'' +
                 ", path='" + path + '\'' +
                 ", info='" + info + '\'' +
+                ", postlimit=" + postlimit +
                 '}';
     }
 }

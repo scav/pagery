@@ -1,5 +1,6 @@
 package com.devbugger.pagery.transform.pagery;
 
+import com.devbugger.pagery.configuration.PageryConfigSupport;
 import com.devbugger.pagery.site.Post;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import static com.devbugger.pagery.transform.pagery.TransformPageryPost.CATEGORY
  * @param <T>
  * @param <S>
  */
-public interface TransformPageryWithResources<T, S> {
+public interface TransformPageryWithResources<T, S> extends PageryConfigSupport {
 
     T transform(T t, List<S> s);
 

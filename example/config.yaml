@@ -11,6 +11,7 @@ project:
   path: http://localhost:8080
   info: This is a blog about a static blog generator named Pagery.
           Pagery is on github and other places.
+  postlimit: 1 # Amount of posts to show on the frontpage
 
 server:
   name: localhost

@@ -37,6 +37,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     @Override
     public IndexPage transformIndexPage(String path, List<Post> posts) {
         TransformPageryWithResources<IndexPage, Post> transformPagery = new TransformPageryIndexPage();
+        transformPagery.setConfig(config);
         String content = generate(path);
 
         IndexPage indexPage = new IndexPage(transformFontMatter.create(content));

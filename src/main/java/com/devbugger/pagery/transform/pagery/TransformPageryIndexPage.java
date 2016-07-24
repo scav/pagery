@@ -1,5 +1,6 @@
 package com.devbugger.pagery.transform.pagery;
 
+import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.site.IndexPage;
 import com.devbugger.pagery.site.Post;
 
@@ -10,7 +11,12 @@ import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
 
 public class TransformPageryIndexPage implements TransformPageryWithResources<IndexPage, Post> {
 
-    private final int POST_LIMIT = 1;
+    private Config config;
+
+    @Override
+    public void setConfig(Config config) {
+        this.config = config;
+    }
 
     @Override
     public IndexPage transform(IndexPage indexPage, List<Post> posts) {
@@ -27,7 +33,7 @@ public class TransformPageryIndexPage implements TransformPageryWithResources<In
         StringBuilder content = new StringBuilder();
         content.append(pre);
 
-        posts.stream().limit(POST_LIMIT).collect(Collectors.toList()).forEach(p -> {
+        posts.stream().limit(config.getProject().getPostlimit()).collect(Collectors.toList()).forEach(p -> {
             // Create a copy of the content between the markers.
             String output = input.substring(indexPre, input.indexOf(POST_END));
 

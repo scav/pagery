@@ -1,5 +1,6 @@
 package com.devbugger.pagery.transform.pagery;
 
+import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.site.Post;
 import com.devbugger.pagery.site.PostPage;
 
@@ -10,6 +11,13 @@ import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
 import static com.devbugger.pagery.transform.pagery.TransformPageryPost.CATEGORY_SEPARATOR;
 
 public class TransformPageryPostPage implements TransformPageryWithResources<PostPage, Post> {
+
+    private Config config;
+
+    @Override
+    public void setConfig(Config config) {
+        this.config = config;
+    }
 
     @Override
     public PostPage transform(PostPage postPage, List<Post> posts) {
