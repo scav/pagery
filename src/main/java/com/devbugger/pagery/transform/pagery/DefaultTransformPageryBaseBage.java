@@ -34,6 +34,7 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
      * @param pages all transformed pages
      * @return the html formatted menu
      */
+    @Override
     public String menu(List<Page> pages) {
         StringBuilder builder = new StringBuilder();
 

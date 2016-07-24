@@ -4,6 +4,8 @@ import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.site.BasePage;
 import com.devbugger .pagery.site.Page;
 
+import java.util.List;
+
 public interface TransformPageryBasePage<T,S> {
 
     /**
@@ -15,6 +17,13 @@ public interface TransformPageryBasePage<T,S> {
      * @return the transformed html as S
      */
     T transform(Config config, T t, S s);
+
+    /**
+     * Generate the menu from from input.
+     * @param s all transformed pages
+     * @return the html formatted menu
+     */
+    String menu(S s);
 
      /**
      *  This is a specialized, non-genric method for attaching
