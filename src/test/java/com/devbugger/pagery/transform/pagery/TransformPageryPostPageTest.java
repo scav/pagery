@@ -12,7 +12,7 @@ import java.util.List;
 @RunWith(JUnit4.class)
 public class TransformPageryPostPageTest {
 
-    private TransformPageryWithResources<PostPage, List<Post>> transformPagery;
+    private TransformPageryWithResources<PostPage, Post> transformPagery;
 
     @Before
     public void setup() {
