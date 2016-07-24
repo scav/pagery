@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import static org.junit.Assert.assertNotNull;
+
 @RunWith(JUnit4.class)
 public class PageryYAMLConfigTest {
 
@@ -11,8 +13,8 @@ public class PageryYAMLConfigTest {
 
     @Test
     public void read() throws Exception {
-        Config config = yamlConfig.read("example/project.yaml");
+        Config config = yamlConfig.read("example/config.yaml");
 
-        System.out.println(config);
+        assertNotNull("Config object should exist", config);
     }
 }

@@ -6,7 +6,6 @@ import com.devbugger.pagery.site.Page;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
 
@@ -19,10 +18,10 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
         if(input.contains(PAGERY_PAGES))
             input = input.replace(PAGERY_PAGES, menu(pages));
         if(input.contains(PAGERY_TITLE))
-            input = input.replace(PAGERY_TITLE, "<a href=\"/\">"+config.getProjectName()+"</a>\n");
+            input = input.replace(PAGERY_TITLE, "<a href=\"/\">"+config.getProject().getTitle()+"</a>\n");
         if(input.contains(PAGERY_SITE_INFO)) {
             input = input.replace(PAGERY_SITE_INFO, "Created @ "+LocalDateTime.now().toString() + "<br />" +
-                    config.getSiteInfo());
+                    config.getProject().getInfo());
         }
 
         basePage.setContent(input);

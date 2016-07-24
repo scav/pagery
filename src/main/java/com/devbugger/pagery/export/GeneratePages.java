@@ -49,7 +49,7 @@ public class GeneratePages {
         List<Post> posts = new ArrayList<>();
 
         try (DirectoryStream<Path> postStream = Files.newDirectoryStream(Paths.get(
-                config.getRoot()+config.getPostDir()), "*."+config.getSuffix())) {
+                config.getFiles().getRoot()+config.getFiles().getPost()), "*."+config.getFiles().getSuffix())) {
             postStream.forEach(post -> posts.add(transformer.transformPost(post.toAbsolutePath().toString())));
 
 
@@ -58,7 +58,7 @@ public class GeneratePages {
         }
 
         try (DirectoryStream<Path> pageStream = Files.newDirectoryStream(Paths.get(
-                config.getRoot()+config.getPageDir()), "*."+config.getSuffix())) {
+                config.getFiles().getRoot()+config.getFiles().getPage()), "*."+config.getFiles().getSuffix())) {
             pageStream.forEach(post -> pages.add(transformer.transformPage(post.toAbsolutePath().toString())));
 
 
@@ -66,9 +66,9 @@ public class GeneratePages {
             e.printStackTrace();
         }
 
-        indexPage = transformer.transformIndexPage(config.getRoot()+"/index.md", posts);
-        postPage = transformer.transformPostPage(config.getRoot()+"/page/post.md", posts);
-        basePage = transformer.transformBasePage(config.getRoot()+"/basepage.md", pages);
+        indexPage = transformer.transformIndexPage(config.getFiles().getRoot()+"/index.md", posts);
+        postPage = transformer.transformPostPage(config.getFiles().getRoot()+"/page/post.md", posts);
+        basePage = transformer.transformBasePage(config.getFiles().getRoot()+"/basepage.md", pages);
 
         //Combine all page files
         pages.add(postPage);
