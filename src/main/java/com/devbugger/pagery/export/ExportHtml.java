@@ -3,7 +3,6 @@ package com.devbugger.pagery.export;
 
 import com.devbugger.pagery.site.IndexPage;
 import com.devbugger.pagery.site.Page;
-import com.devbugger.pagery.site.PostPage;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

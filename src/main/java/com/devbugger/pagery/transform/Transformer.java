@@ -1,6 +1,5 @@
 package com.devbugger.pagery.transform;
 
-import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.configuration.PageryConfigSupport;
 import com.devbugger.pagery.site.*;
 import com.devbugger.pagery.transform.fontmatter.TransformFontMatter;

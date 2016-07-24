@@ -2,7 +2,7 @@ package com.devbugger.pagery.transform.pagery;
 
 import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.site.BasePage;
-import com.devbugger .pagery.site.Page;
+import com.devbugger.pagery.site.Page;
 
 import java.util.List;
 

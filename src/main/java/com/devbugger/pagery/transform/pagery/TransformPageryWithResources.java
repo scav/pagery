@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
-import static com.devbugger.pagery.transform.pagery.PageryMarkers.POST_LEAD_PARAGRAPH_END;
-import static com.devbugger.pagery.transform.pagery.PageryMarkers.POST_LEAD_PARAGRAPH_START;
 import static com.devbugger.pagery.transform.pagery.TransformPageryPost.CATEGORY_SEPARATOR;
 
 /**

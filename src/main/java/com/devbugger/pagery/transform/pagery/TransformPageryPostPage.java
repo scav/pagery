@@ -5,10 +5,8 @@ import com.devbugger.pagery.site.Post;
 import com.devbugger.pagery.site.PostPage;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
-import static com.devbugger.pagery.transform.pagery.TransformPageryPost.CATEGORY_SEPARATOR;
 
 public class TransformPageryPostPage implements TransformPageryWithResources<PostPage, Post> {
 
