@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
 import static com.devbugger.pagery.transform.pagery.TransformPageryPost.CATEGORY_SEPARATOR;
 
-public class TransformPageryPostPage implements TransformPageryWithResources<PostPage, List<Post>> {
+public class TransformPageryPostPage implements TransformPageryWithResources<PostPage, Post> {
 
     @Override
     public PostPage transform(PostPage postPage, List<Post> posts) {

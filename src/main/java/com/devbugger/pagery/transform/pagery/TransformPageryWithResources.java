@@ -2,6 +2,7 @@ package com.devbugger.pagery.transform.pagery;
 
 import com.devbugger.pagery.site.Post;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
@@ -17,7 +18,7 @@ import static com.devbugger.pagery.transform.pagery.TransformPageryPost.CATEGORY
  */
 public interface TransformPageryWithResources<T, S> {
 
-    T transform(T t, S s);
+    T transform(T t, List<S> s);
 
     default String transform(String input, Post post) {
         if(input.contains(POST_TITLE))

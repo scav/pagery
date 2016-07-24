@@ -36,7 +36,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
     @Override
     public IndexPage transformIndexPage(String path, List<Post> posts) {
-        TransformPageryWithResources<IndexPage, List<Post>> transformPagery = new TransformPageryIndexPage();
+        TransformPageryWithResources<IndexPage, Post> transformPagery = new TransformPageryIndexPage();
         String content = generate(path);
 
         IndexPage indexPage = new IndexPage(transformFontMatter.create(content));
@@ -72,7 +72,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
     @Override
     public PostPage transformPostPage(String path, List<Post> posts) {
-        TransformPageryWithResources<PostPage, List<Post>> transformPagery = new TransformPageryPostPage();
+        TransformPageryWithResources<PostPage, Post> transformPagery = new TransformPageryPostPage();
         String content = generate(path);
 
         PostPage postPage = new PostPage(transformFontMatter.create(content));

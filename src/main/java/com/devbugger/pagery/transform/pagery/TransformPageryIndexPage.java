@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
 
-public class TransformPageryIndexPage implements TransformPageryWithResources<IndexPage, List<Post>> {
+public class TransformPageryIndexPage implements TransformPageryWithResources<IndexPage, Post> {
 
     private final int POST_LIMIT = 1;
 
