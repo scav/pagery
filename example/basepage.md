@@ -12,3 +12,5 @@ info: this page is duplicated every time a page is generated.
 @pagery.content
 
 @pagery.info
+
+@pagery.buildinfo

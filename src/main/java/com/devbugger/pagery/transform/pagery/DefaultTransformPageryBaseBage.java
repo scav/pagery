@@ -19,10 +19,10 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
             input = input.replace(PAGERY_PAGES, menu(pages));
         if(input.contains(PAGERY_TITLE))
             input = input.replace(PAGERY_TITLE, "<a href=\"/\">"+config.getProject().getTitle()+"</a>\n");
-        if(input.contains(PAGERY_SITE_INFO)) {
-            input = input.replace(PAGERY_SITE_INFO, "Created @ "+LocalDateTime.now().toString() + "<br />" +
-                    config.getProject().getInfo());
-        }
+        if(input.contains(PAGERY_SITE_INFO))
+            input = input.replace(PAGERY_SITE_INFO, config.getProject().getInfo());
+        if(input.contains(PAGERY_BUILD_INFO))
+            input = input.replace(PAGERY_BUILD_INFO, "Created @ "+LocalDateTime.now().toString() + "<br />");
 
         basePage.setContent(input);
 
