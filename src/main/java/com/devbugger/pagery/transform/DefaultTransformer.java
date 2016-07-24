@@ -1,5 +1,6 @@
 package com.devbugger.pagery.transform;
 
+import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.site.*;
 import com.devbugger.pagery.transform.fontmatter.TransformFontMatter;
 import com.devbugger.pagery.transform.markdown.TransformMarkdown;
@@ -14,8 +15,14 @@ import java.util.List;
  */
 public class DefaultTransformer implements Transformer, TransformerFileUtils {
 
+    private Config config;
     private TransformMarkdown transformMarkdown;
     private TransformFontMatter transformFontMatter;
+
+    @Override
+    public void setConfig(Config config) {
+        this.config = config;
+    }
 
     @Override
     public void setTransformMarkdown(TransformMarkdown transformMarkdown) {
@@ -48,7 +55,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
         content = transformFontMatter.stripFontMatter(content);
         basePage.setContent(transformMarkdown.transform(content));
 
-        return transformPagery.transform(basePage, pages);
+        return transformPagery.transform(config, basePage, pages);
     }
 
     @Override

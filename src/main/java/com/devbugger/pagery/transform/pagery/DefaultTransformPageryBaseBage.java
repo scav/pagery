@@ -1,5 +1,6 @@
 package com.devbugger.pagery.transform.pagery;
 
+import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.site.BasePage;
 import com.devbugger.pagery.site.Page;
 
@@ -12,16 +13,16 @@ import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
 public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<BasePage, List<Page>> {
 
     @Override
-    public BasePage transform(BasePage basePage, List<Page> pages) {
+    public BasePage transform(Config config, BasePage basePage, List<Page> pages) {
         String input = basePage.getContent();
 
         if(input.contains(PAGERY_PAGES))
             input = input.replace(PAGERY_PAGES, menu(pages));
         if(input.contains(PAGERY_TITLE))
-            input = input.replace(PAGERY_TITLE, "<a href=\"/\">Dags Blog</a>\n");
+            input = input.replace(PAGERY_TITLE, "<a href=\"/\">"+config.getProjectName()+"</a>\n");
         if(input.contains(PAGERY_SITE_INFO)) {
             input = input.replace(PAGERY_SITE_INFO, "Created @ "+LocalDateTime.now().toString() + "<br />" +
-                    "This info tag can be found in com.devbugger.pagery.transform.pagery.TransformPageryBaseBageImpl");
+                    config.getSiteInfo());
         }
 
         basePage.setContent(input);

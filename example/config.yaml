@@ -1,0 +1,18 @@
+# Example configuration file for a project.
+
+# System and files
+suffix: md
+root: /Users/dag/dev/pagery/example
+postDir: /post
+pageDir: /page
+
+# Project
+projectName: Pagery Static Blog
+siteName: http://pagery.io
+siteInfo: This is a blog about a static blog generator named Pagery.
+          Pagery is on github and other places.
+
+# Server
+name: localhost
+host: localhost
+port: 8080

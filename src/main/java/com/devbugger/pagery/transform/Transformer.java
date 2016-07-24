@@ -1,5 +1,6 @@
 package com.devbugger.pagery.transform;
 
+import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.site.*;
 import com.devbugger.pagery.transform.fontmatter.TransformFontMatter;
 import com.devbugger.pagery.transform.markdown.TransformMarkdown;
@@ -12,6 +13,7 @@ import java.util.List;
  * of all the content used to create a complete page form templates.
  */
 public interface Transformer {
+    void setConfig(Config config);
     void setTransformMarkdown(TransformMarkdown transformMarkdown);
     void setTransformFontMatter(TransformFontMatter transformFontMatter);
 

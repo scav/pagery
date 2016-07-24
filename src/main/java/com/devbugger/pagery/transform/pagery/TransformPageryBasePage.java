@@ -1,5 +1,6 @@
 package com.devbugger.pagery.transform.pagery;
 
+import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.site.BasePage;
 import com.devbugger .pagery.site.Page;
 
@@ -8,11 +9,12 @@ public interface TransformPageryBasePage<T,S> {
     /**
      * Transform the content within a template based on the occurrence
      * of markers defined in {@link PageryMarkers}
-     * @param t object
-     * @param s
+     * @param t the page type
+     * @param s the input data
+     * @param config active configuration file
      * @return the transformed html as S
      */
-    T transform(T t, S s);
+    T transform(Config config, T t, S s);
 
      /**
      *  This is a specialized, non-genric method for attaching
