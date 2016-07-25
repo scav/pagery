@@ -39,7 +39,7 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
         StringBuilder builder = new StringBuilder();
 
         // Sort the menu alphabetically
-        pages.sort((p1, p2) -> p1.getFontMatterMeta().getTitle().compareTo(p2.getFontMatterMeta().getTitle()));
+        //pages.sort((p1, p2) -> p1.getFontMatterMeta().getTitle().compareTo(p2.getFontMatterMeta().getTitle()));
 
         pages.forEach(p -> {
             String type = p.getFontMatterMeta().getType();
@@ -61,9 +61,12 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
         if(basePage.getContent().contains(PAGERY_CONTENT)) {
             page.setContent(basePage.getContent().replace(PAGERY_CONTENT, page.getContent()));
 
-            return page;
         }
-        return null;
+        if(page.getContent().contains(PAGERY_HEADER_TITLE)) {
+            page.setContent(page.getContent().replace(PAGERY_HEADER_TITLE, page.getFontMatterMeta().getTitle()));
+        }
+
+        return page;
     }
 
 }

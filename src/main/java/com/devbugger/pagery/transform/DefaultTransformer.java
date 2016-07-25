@@ -50,11 +50,9 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     @Override
     public BasePage transformBasePage(String path, List<Page> pages) {
         TransformPageryBasePage<BasePage, Page> transformPagery = new DefaultTransformPageryBaseBage();
-        String content = generate(path);
 
-        BasePage basePage = new BasePage(transformFontMatter.create(content));
-        content = transformFontMatter.stripFontMatter(content);
-        basePage.setContent(transformMarkdown.transform(content));
+        BasePage basePage = new BasePage();
+        basePage.setContent(generate(path));
 
         return transformPagery.transform(config, basePage, pages);
     }

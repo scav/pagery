@@ -68,7 +68,7 @@ public class GeneratePages {
 
         indexPage = transformer.transformIndexPage(config.getFiles().getRoot()+"/index.md", posts);
         postPage = transformer.transformPostPage(config.getFiles().getRoot()+"/page/post.md", posts);
-        basePage = transformer.transformBasePage(config.getFiles().getRoot()+"/basepage.md", pages);
+        basePage = transformer.transformBasePage(config.getFiles().getRoot()+"/template.html", pages);
 
         //Combine all page files
         pages.add(postPage);
