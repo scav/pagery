@@ -18,19 +18,13 @@ public interface TransformPageryBasePage<T, S> {
      */
     T transform(Config config, T t, List<S> s);
 
-    /**
-     * Generate the menu from from input.
-     * @param s contains all transformed pages
-     * @return the html formatted menu
-     */
-    String menu(List<S> s);
-
      /**
      *  This is a specialized, non-genric method for attaching
      * {@link com.devbugger.pagery.site.BasePage} content to the given {@link Page}.
      * @param basePage content to attach
      * @param page receiver of content
+     * @param pages the pages used to attach menu tags
      * @return page with basepage content attached
      */
-    Page attach(BasePage basePage, Page page);
+    Page attach(BasePage basePage, Page page, List<Page> pages);
 }

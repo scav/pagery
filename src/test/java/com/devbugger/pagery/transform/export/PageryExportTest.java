@@ -14,7 +14,6 @@ import com.devbugger.pagery.transform.markdown.TransformMarkdown;
 import com.devbugger.pagery.transform.pagery.DefaultTransformPageryBaseBage;
 import com.devbugger.pagery.transform.pagery.TransformPageryBasePage;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -37,36 +36,6 @@ public class PageryExportTest {
         transformer.setTransformFontMatter(new TransformFontMatter());
         transformer.setTransformMarkdown(new TransformMarkdown());
         transformer.setConfig(new PageryYAMLConfig().read("example/config.yaml"));
-    }
-
-    @Test
-    public void export() throws Exception {
-        List<Post> posts = new ArrayList<>();
-        List<Page> pages = new ArrayList<>();
-
-        posts.add(transformer.transformPost("example/post/post-hello.md"));
-        posts.add(transformer.transformPost("example/post/post-pagery.md"));
-        PostPage postPage = transformer.transformPostPage("example/page/post.md", posts);
-        pages.add(postPage);
-
-        pages.add(transformer.transformPage("example/page/about.md"));
-        pages.add(transformer.transformPage("example/page/contact.md"));
-
-        BasePage basePage = transformer.transformBasePage("example/template.html", pages);
-
-        // Combine all pages
-        List<Page> allPages = new ArrayList<>();
-        allPages.addAll(pages);
-        allPages.addAll(posts);
-
-        // Add the surrounding page content with the base page
-        TransformPageryBasePage<BasePage, Page> base = new DefaultTransformPageryBaseBage();
-        allPages.forEach(p -> p = base.attach(basePage, p));
-
-        // Write all pages to disk
-        ExportHtml exportHtml = new ExportHtml();
-        allPages.forEach(exportHtml::write);
-
     }
 
     @Test

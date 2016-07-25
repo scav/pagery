@@ -27,8 +27,6 @@ public class GeneratePages {
     private Config config;
 
     private List<Page> pages = new ArrayList<>();
-    private IndexPage indexPage;
-    private PostPage postPage;
     private BasePage basePage;
 
     public GeneratePages(Config config) {
@@ -66,21 +64,18 @@ public class GeneratePages {
             e.printStackTrace();
         }
 
-        indexPage = transformer.transformIndexPage(config.getFiles().getRoot()+"/index.md", posts);
-        postPage = transformer.transformPostPage(config.getFiles().getRoot()+"/page/post.md", posts);
+        pages.add(transformer.transformIndexPage(config.getFiles().getRoot()+"/index.md", posts));
+        pages.add(transformer.transformPostPage(config.getFiles().getRoot()+"/post.md", posts));
         basePage = transformer.transformBasePage(config.getFiles().getRoot()+"/template.html", pages);
 
-        //Combine all page files
-        pages.add(postPage);
+        //Add posts to pages to enable attaching basepage stuff to them
         pages.addAll(posts);
 
         TransformPageryBasePage<BasePage, Page> base = new DefaultTransformPageryBaseBage();
-        base.attach(basePage, indexPage);
-        pages.forEach(p -> p = base.attach(basePage, p));
+        pages.forEach(p -> p = base.attach(basePage, p, pages));
 
         ExportHtml exportHtml = new ExportHtml();
         pages.forEach(exportHtml::write);
-        exportHtml.write(indexPage);
     }
 
 }

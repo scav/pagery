@@ -3,6 +3,7 @@ package com.devbugger.pagery.transform.pagery;
 import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.site.BasePage;
 import com.devbugger.pagery.site.Page;
+import com.devbugger.pagery.site.Post;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,8 +16,6 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
     public BasePage transform(Config config, BasePage basePage, List<Page> pages) {
         String input = basePage.getContent();
 
-        if(input.contains(PAGERY_PAGES))
-            input = input.replace(PAGERY_PAGES, menu(pages));
         if(input.contains(PAGERY_TITLE))
             input = input.replace(PAGERY_TITLE, "<a href=\"/\">"+config.getProject().getTitle()+"</a>\n");
         if(input.contains(PAGERY_SITE_INFO))
@@ -29,44 +28,52 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
         return basePage;
     }
 
+    @Override
+    public Page attach(BasePage basePage, Page page, List<Page> pages) {
+        if(basePage.getContent().contains(PAGERY_CONTENT)) {
+            page.setContent(basePage.getContent().replace(PAGERY_CONTENT, page.getContent()));
+        }
+        if(page.getContent().contains(PAGERY_HEADER_TITLE)) {
+            page.setContent(page.getContent().replace(PAGERY_HEADER_TITLE, page.getFontMatterMeta().getTitle()));
+        }
+        if(page.getContent().contains(PAGERY_PAGES)) {
+            page.setContent(page.getContent().replace(PAGERY_PAGES, menu(pages, page)));
+        }
+
+        return page;
+    }
+
     /**
      * Generate the menu from a list of existing pages.
      * @param pages all transformed pages
      * @return the html formatted menu
      */
-    @Override
-    public String menu(List<Page> pages) {
+    private String menu(List<Page> pages, Page p) {
         StringBuilder builder = new StringBuilder();
 
-        // Sort the menu alphabetically
-        //pages.sort((p1, p2) -> p1.getFontMatterMeta().getTitle().compareTo(p2.getFontMatterMeta().getTitle()));
+        for (Page page : pages) {
+            String type = page.getFontMatterMeta().getType();
+            String name = page.getFontMatterMeta().getTitle();
 
-        pages.forEach(p -> {
-            String type = p.getFontMatterMeta().getType();
-            String name = p.getFontMatterMeta().getTitle();
-                builder.append("\n<a href=\"/")
-                    .append(type)
+            if(page instanceof Post) {
+                continue;
+            }
+            if(page.equals(p)) {
+                builder.append("\n<a class=\"active\" href=\"/");
+            }
+            else {
+                builder.append("\n<a href=\"/");
+            }
+            builder.append(type)
                     .append("/")
                     .append(name)
                     .append(".html\">")
                     .append(name)
                     .append("</a>");
-        });
+        }
 
         return builder.toString();
-    }
 
-    @Override
-    public Page attach(BasePage basePage, Page page) {
-        if(basePage.getContent().contains(PAGERY_CONTENT)) {
-            page.setContent(basePage.getContent().replace(PAGERY_CONTENT, page.getContent()));
-
-        }
-        if(page.getContent().contains(PAGERY_HEADER_TITLE)) {
-            page.setContent(page.getContent().replace(PAGERY_HEADER_TITLE, page.getFontMatterMeta().getTitle()));
-        }
-
-        return page;
     }
 
 }
