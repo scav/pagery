@@ -1,5 +1,7 @@
 package com.devbugger.pagery.transform.pagery;
 
+import com.devbugger.pagery.html.attribute.css.CSSClass;
+import com.devbugger.pagery.html.element.AHref;
 import com.devbugger.pagery.site.Post;
 
 import java.util.stream.Collectors;
@@ -16,8 +18,12 @@ public class TransformPageryPost implements TransformPagery<Post> {
 
         if(input.contains(POST_TITLE))
             input = input.replace(POST_TITLE,
-                    "<a href=\"/"+post.getFontMatterMeta().getType()+"/"+post.getFontMatterMeta().getTitle()+".html\">"+
-                            post.getFontMatterMeta().getTitle()+"</a>");
+                    new AHref(post.getFontMatterMeta().getTitle(),
+                            post.getFontMatterMeta().getType(), post.getFontMatterMeta().getTitle())
+                            .attributes(new CSSClass("title"))
+                            .get());
+                    //"<a href=\"/"+post.getFontMatterMeta().getType()+"/"+post.getFontMatterMeta().getTitle()+".html\">"+
+                    //        post.getFontMatterMeta().getTitle()+"</a>");
         if(input.contains(POST_AUTHOR)) {
             input = input.replace(POST_AUTHOR, post.getFontMatterMeta().getAuthor());
         }
