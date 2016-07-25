@@ -36,23 +36,23 @@ public class PageryExportTest {
         transformer = new DefaultTransformer();
         transformer.setTransformFontMatter(new TransformFontMatter());
         transformer.setTransformMarkdown(new TransformMarkdown());
+        transformer.setConfig(new PageryYAMLConfig().read("example/config.yaml"));
     }
 
     @Test
-    @Ignore("Not working with the new YAML configuration.")
     public void export() throws Exception {
         List<Post> posts = new ArrayList<>();
         List<Page> pages = new ArrayList<>();
 
         posts.add(transformer.transformPost("example/post/post-hello.md"));
         posts.add(transformer.transformPost("example/post/post-pagery.md"));
-        PostPage postPage = transformer.transformPostPage("example/postpage.md", posts);
+        PostPage postPage = transformer.transformPostPage("example/page/post.md", posts);
         pages.add(postPage);
 
         pages.add(transformer.transformPage("example/page/about.md"));
         pages.add(transformer.transformPage("example/page/contact.md"));
 
-        BasePage basePage = transformer.transformBasePage("example/basepage.md", pages);
+        BasePage basePage = transformer.transformBasePage("example/template.html", pages);
 
         // Combine all pages
         List<Page> allPages = new ArrayList<>();
