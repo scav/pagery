@@ -1,6 +1,7 @@
 package com.devbugger.pagery.configuration;
 
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,16 +14,31 @@ public class PageryYAMLConfig implements PageryConfig{
     private Yaml yaml;
 
     public PageryYAMLConfig() {
-        this.yaml = new Yaml();
+        this.yaml = new Yaml(new Constructor(Config.class));
+        //this.yaml = new Yaml();
     }
 
     @Override
     public Config read(String path) {
+
+
         try(InputStream in = Files.newInputStream(Paths.get(path))) {
-            return yaml.loadAs(in, Config.class);
+            return (Config) yaml.load(in);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
+
+
+
+//    @Override
+//    public Config read(String path) {
+//        try(InputStream in = Files.newInputStream(Paths.get(path))) {
+//            return yaml.loadAs(in, Config.class);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 }

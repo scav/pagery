@@ -15,6 +15,8 @@ public class PageryYAMLConfigTest {
     public void read() throws Exception {
         Config config = yamlConfig.read("example/config.yaml");
 
+        config.getFiles().getResources().forEach(System.out::println);
+
         assertNotNull("Config object should exist", config);
     }
 }

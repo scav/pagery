@@ -1,7 +1,7 @@
 package com.devbugger.pagery.transform.pagery;
 
 import com.devbugger.pagery.configuration.Config;
-import com.devbugger.pagery.configuration.PageryConfigSupport;
+import com.devbugger.pagery.configuration.Resource;
 import com.devbugger.pagery.html.attribute.Charset;
 import com.devbugger.pagery.html.attribute.Href;
 import com.devbugger.pagery.html.attribute.Rel;
@@ -12,12 +12,11 @@ import com.devbugger.pagery.site.Page;
 import com.devbugger.pagery.site.Post;
 
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.devbugger.pagery.html.attribute.AttributeType.CHARSET_UTF8;
@@ -101,31 +100,62 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
     }
 
     String css() {
+        String path = config.getFiles().getRoot()+config.getFiles().getResource();
         StringBuilder output = new StringBuilder();
 
-        try (DirectoryStream<Path> postStream = Files.newDirectoryStream(Paths.get(
-                config.getFiles().getRoot()+config.getFiles().getResource()))) {
+        // Set up the resource with the correct load order
+        Resource[] loadOrdered = new Resource[config.getFiles().getResources().size()];
+        for (Resource resource : config.getFiles().getResources()) {
+            int pos = resource.getLoadOrder();
+            loadOrdered[pos-1] = resource;
+        }
+
+        // Add resources with their given load order
+        for (Resource resource : loadOrdered) {
+            output.append(
+                new Link()
+                    .attributes(
+                    new Rel(STYLESHEET),
+                    new Type(TEXT_CSS),
+                    new Charset(CHARSET_UTF8),
+                    new Href("/" + config.getFiles().getResource()+resource.getLocation())).get()
+            ).append("\n\t");
+        }
+
+        // Set up a filter based on CSS files and files not in load order
+        final PathMatcher matcher = Paths.get(path).getFileSystem().getPathMatcher("glob:" + "*.css");
+        DirectoryStream.Filter<Path> filter = entry -> {
+            for (Resource resource : loadOrdered) {
+                if (entry.getFileName().toString().equals(resource.getLocation()) || !matcher.matches(entry.getFileName())) {
+                    return false;
+                }
+            }
+            return true;
+        };
+
+        // Add the rest of the files not under load order
+        try (DirectoryStream<Path> postStream = Files.newDirectoryStream(
+                Paths.get(path), filter)) {
 
             postStream.forEach(p ->
-                    output.append(
+                output.append(
                     new Link()
                         .attributes(
-                                new Rel(STYLESHEET),
-                                new Type(TEXT_CSS),
-                                new Charset(CHARSET_UTF8),
-                                new Href("/"+config.getFiles().getResource()+"/"+p.getFileName().toString())).get()
-                    )
+                        new Rel(STYLESHEET),
+                        new Type(TEXT_CSS),
+                        new Charset(CHARSET_UTF8),
+                        new Href("/" + config.getFiles().getResource()+p.getFileName().toString())).get()
+                ).append("\n\t")
+            );
 
-        );
 
-            //
             return output.toString();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return output.toString();
+        return "";
 
     }
 

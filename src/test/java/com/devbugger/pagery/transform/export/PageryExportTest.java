@@ -1,9 +1,11 @@
 package com.devbugger.pagery.transform.export;
 
 
+import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.configuration.PageryYAMLConfig;
 import com.devbugger.pagery.export.ExportHtml;
 import com.devbugger.pagery.export.GeneratePages;
+import com.devbugger.pagery.export.GenerateResources;
 import com.devbugger.pagery.site.BasePage;
 import com.devbugger.pagery.site.Page;
 import com.devbugger.pagery.site.Post;
@@ -28,19 +30,23 @@ import java.util.List;
 @RunWith(JUnit4.class)
 public class PageryExportTest {
 
+    private Config config;
     private DefaultTransformer transformer;
 
     @Before
     public void setup() {
+        config = new PageryYAMLConfig().read("example/config.yaml");
+
         transformer = new DefaultTransformer();
         transformer.setTransformFontMatter(new TransformFontMatter());
         transformer.setTransformMarkdown(new TransformMarkdown());
-        transformer.setConfig(new PageryYAMLConfig().read("example/config.yaml"));
+        transformer.setConfig(config);
     }
 
     @Test
     public void initializeData() throws Exception {
-        GeneratePages generatePages = new GeneratePages(new PageryYAMLConfig().read("example/config.yaml"));
+        GeneratePages generatePages = new GeneratePages(config);
+        GenerateResources generateResources = new GenerateResources(config);
     }
 
 }

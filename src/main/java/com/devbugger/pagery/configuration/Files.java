@@ -1,5 +1,7 @@
 package com.devbugger.pagery.configuration;
 
+import java.util.List;
+
 public class Files {
 
     private String suffix;
@@ -8,6 +10,7 @@ public class Files {
     private String page;
     private String resource;
     private String target;
+    private List<Resource> resources;
 
     public String getSuffix() {
         return suffix;
@@ -57,6 +60,14 @@ public class Files {
         this.target = target;
     }
 
+    public List<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(List<Resource> resources) {
+        this.resources = resources;
+    }
+
     @Override
     public String toString() {
         return "Files{" +
@@ -66,6 +77,7 @@ public class Files {
                 ", page='" + page + '\'' +
                 ", resource='" + resource + '\'' +
                 ", target='" + target + '\'' +
+                ", resources=" + resources +
                 '}';
     }
 }
