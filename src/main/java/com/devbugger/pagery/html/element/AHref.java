@@ -1,5 +1,12 @@
 package com.devbugger.pagery.html.element;
 
+/**
+ * Special element combining both the element <b>a</b> and tag <b>href</b>.
+ * It helps creating path based links for all auto generated pages.
+ *
+ * A general {@link com.devbugger.pagery.html.attribute.Attribute} version {@link com.devbugger.pagery.html.attribute.Href}
+ * exists for adding simple href="example.org" attributes to elements.
+ */
 public class AHref extends HtmlElement {
 
     private static final String OPEN_TAG = "<a href=\"/";
