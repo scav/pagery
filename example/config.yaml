@@ -5,6 +5,7 @@ files:
   root: /Users/dag/dev/pagery/example/
   post: post
   page: page
+  resource: resources
 
 project:
   title: Pagery Static Blog
