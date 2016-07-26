@@ -36,6 +36,6 @@ public class ElementTest {
 
         assertThat("Stylesheet link should contain all elements",
                 link.get(),
-                is("<link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" href=\"style.css\"</link>"));
+                is("<link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" href=\"style.css\"/>"));
     }
 }
