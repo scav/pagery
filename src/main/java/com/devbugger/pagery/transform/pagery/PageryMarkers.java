@@ -53,7 +53,7 @@ public class PageryMarkers {
     public static final String PAGE_DATE = PREFIX+"page.date";
 
     public static final String PAGERY_HEADER_TITLE = PREFIX+"pagery.header.title";
-    public static final String PAGERY_HEADER_RESOURCES = PREFIX+"pagery.header.resources";
+    public static final String PAGERY_HEADER_CSS = PREFIX+"pagery.header.css";
 
 
 

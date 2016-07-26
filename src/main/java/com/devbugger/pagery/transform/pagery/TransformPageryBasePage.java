@@ -1,12 +1,13 @@
 package com.devbugger.pagery.transform.pagery;
 
 import com.devbugger.pagery.configuration.Config;
+import com.devbugger.pagery.configuration.PageryConfigSupport;
 import com.devbugger.pagery.site.BasePage;
 import com.devbugger.pagery.site.Page;
 
 import java.util.List;
 
-public interface TransformPageryBasePage<T, S> {
+public interface TransformPageryBasePage<T, S> extends PageryConfigSupport {
 
     /**
      * Transform the content within a template based on the occurrence
