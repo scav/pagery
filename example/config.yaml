@@ -5,8 +5,15 @@ files:
   root: /Users/dag/dev/pagery/example/
   post: post
   page: page
-  resource: resources
+  resource: resources/
   target: /Users/dag/dev/pagery/pagery-out/
+  resources: # Set up the CSS resources that needs a load order. Any resource listed will be given a random order.
+    - location: pure-min.css
+      loadOrder: 1
+    - location: grids-responsive-min.css
+      loadOrder: 2
+    - location: blog.css
+      loadOrder: 3
 
 project:
   title: Pagery Static Blog
