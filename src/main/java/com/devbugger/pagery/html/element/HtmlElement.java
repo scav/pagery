@@ -35,7 +35,6 @@ public abstract class HtmlElement {
             return "";
 
         StringBuilder value = new StringBuilder();
-        int max = attributes.length -1;
         for (int i = 0; i < attributes.length; i++) {
             value.append(" ").append(attributes[i].get());
         }
