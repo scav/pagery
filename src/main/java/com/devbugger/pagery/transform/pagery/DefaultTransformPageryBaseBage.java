@@ -113,7 +113,7 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
                                 new Rel(STYLESHEET),
                                 new Type(TEXT_CSS),
                                 new Charset(CHARSET_UTF8),
-                                new Href(p.getFileName().toString())).get()
+                                new Href("/"+config.getFiles().getResource()+"/"+p.getFileName().toString())).get()
                     )
 
         );

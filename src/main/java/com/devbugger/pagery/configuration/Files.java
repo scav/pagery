@@ -7,6 +7,7 @@ public class Files {
     private String post;
     private String page;
     private String resource;
+    private String target;
 
     public String getSuffix() {
         return suffix;
@@ -48,6 +49,14 @@ public class Files {
         this.resource = resource;
     }
 
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
+    }
+
     @Override
     public String toString() {
         return "Files{" +
@@ -56,6 +65,7 @@ public class Files {
                 ", post='" + post + '\'' +
                 ", page='" + page + '\'' +
                 ", resource='" + resource + '\'' +
+                ", target='" + target + '\'' +
                 '}';
     }
 }

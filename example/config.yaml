@@ -6,6 +6,7 @@ files:
   post: post
   page: page
   resource: resources
+  target: /Users/dag/dev/pagery/pagery-out/
 
 project:
   title: Pagery Static Blog

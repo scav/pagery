@@ -22,6 +22,7 @@ public class ExportHtml {
         try {
             // Create all files for testing purposes.
             Files.createDirectories(Paths.get("pagery-out"));
+            Files.createDirectories(Paths.get("pagery-out/resources"));
             Files.createDirectories(Paths.get("pagery-out/page"));
             Files.createDirectories(Paths.get("pagery-out/post"));
             Files.createDirectories(Paths.get("pagery-out/postpage"));
@@ -42,7 +43,6 @@ public class ExportHtml {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void write(Page page) {
