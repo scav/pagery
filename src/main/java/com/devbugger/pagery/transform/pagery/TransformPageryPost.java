@@ -20,7 +20,7 @@ public class TransformPageryPost implements TransformPagery<Post> {
             input = input.replace(POST_TITLE,
                     new AHref(post.getFontMatterMeta().getTitle(),
                             post.getFontMatterMeta().getType(), post.getFontMatterMeta().getTitle())
-                            .attributes(new CSSClass("title"))
+                            .attributes(new CSSClass("post-title"))
                             .get());
                     //"<a href=\"/"+post.getFontMatterMeta().getType()+"/"+post.getFontMatterMeta().getTitle()+".html\">"+
                     //        post.getFontMatterMeta().getTitle()+"</a>");

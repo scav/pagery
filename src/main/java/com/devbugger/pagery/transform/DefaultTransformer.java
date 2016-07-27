@@ -41,8 +41,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
         String content = generate(path);
 
         IndexPage indexPage = new IndexPage(transformFontMatter.create(content));
-        content = transformFontMatter.stripFontMatter(content);
-        indexPage.setContent(transformMarkdown.transform(content));
+        indexPage.setContent(transformFontMatter.stripFontMatter(content));
 
         return transformPagery.transform(indexPage, posts);
     }
@@ -76,8 +75,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
         String content = generate(path);
 
         PostPage postPage = new PostPage(transformFontMatter.create(content));
-        content = transformFontMatter.stripFontMatter(content);
-        postPage.setContent(transformMarkdown.transform(content));
+        postPage.setContent(transformFontMatter.stripFontMatter(content));
 
         return transformPagery.transform(postPage, posts);
     }

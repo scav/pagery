@@ -64,8 +64,8 @@ public class GeneratePages {
             e.printStackTrace();
         }
 
-        pages.add(transformer.transformIndexPage(config.getFiles().getRoot()+"/index.md", posts));
-        pages.add(transformer.transformPostPage(config.getFiles().getRoot()+"/post.md", posts));
+        pages.add(transformer.transformIndexPage(config.getFiles().getRoot()+"/index.html", posts));
+        pages.add(transformer.transformPostPage(config.getFiles().getRoot()+"/post.html", posts));
         basePage = transformer.transformBasePage(config.getFiles().getRoot()+"/template.html", pages);
 
         //Add posts to pages to enable attaching basepage stuff to them
