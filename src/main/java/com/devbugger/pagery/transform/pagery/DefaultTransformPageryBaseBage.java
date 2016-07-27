@@ -7,9 +7,7 @@ import com.devbugger.pagery.html.attribute.Href;
 import com.devbugger.pagery.html.attribute.Rel;
 import com.devbugger.pagery.html.attribute.Type;
 import com.devbugger.pagery.html.element.Link;
-import com.devbugger.pagery.site.BasePage;
-import com.devbugger.pagery.site.Page;
-import com.devbugger.pagery.site.Post;
+import com.devbugger.pagery.site.*;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -35,6 +33,20 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
 
     @Override
     public BasePage transform(Config config, BasePage basePage, List<Page> pages) {
+        List<MenuItem> menuItems = new ArrayList<>();
+
+        // Generate menu items.
+        for (Page page : pages) {
+            String name = page.getFontMatterMeta().getTitle();
+            String type = page.getFontMatterMeta().getType();
+            if(page instanceof IndexPage)
+                menuItems.add(new MenuItem("Home", name+".html"));
+            else
+                menuItems.add(new MenuItem(name, type+"/"+name+".html"));
+        }
+
+        basePage.setMenuItems(menuItems);
+
         String input = basePage.getContent();
 
         if(input.contains(PAGERY_HEADER_CSS))
@@ -60,10 +72,34 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
             page.setContent(page.getContent().replace(PAGERY_HEADER_TITLE, page.getFontMatterMeta().getTitle()));
         }
         if(page.getContent().contains(PAGERY_PAGES)) {
-            page.setContent(page.getContent().replace(PAGERY_PAGES, menu(pages, page)));
+            page.setContent(page.getContent().replace(PAGERY_PAGES, menu(basePage, page)));
         }
 
         return page;
+    }
+
+    String menu(BasePage basePage, Page page) {
+        StringBuilder builder = new StringBuilder();
+
+        for (MenuItem menuItem : basePage.getMenuItems()) {
+
+            String name = menuItem.getName();
+            String href = menuItem.getHref();
+
+            if (menuItem.getName().equals(page.getFontMatterMeta().getTitle())) {
+                builder.append("\n<a class=\"active\" href=\"/");
+            }
+            else {
+                builder.append("\n<a href=\"/");
+            }
+
+            builder.append(href)
+                    .append("\">")
+                    .append(name)
+                    .append("</a>");
+        }
+
+        return builder.toString();
     }
 
     /**
@@ -71,7 +107,8 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
      * @param pages all transformed pages
      * @return the html formatted menu
      */
-    String menu(List<Page> pages, Page p) {
+    @Deprecated
+    String menuOld(List<Page> pages, Page p) {
         StringBuilder builder = new StringBuilder();
 
         for (Page page : pages) {
