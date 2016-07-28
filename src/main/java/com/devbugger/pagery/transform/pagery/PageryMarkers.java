@@ -19,11 +19,15 @@ public class PageryMarkers {
      * These are used when generating the basic template all other will be
      * extended from.
      */
-    public static final String PAGERY_PAGES = PREFIX+"pagery.pages";
     public static final String PAGERY_TITLE = PREFIX+"pagery.title";
     public static final String PAGERY_CONTENT = PREFIX+"pagery.content";
     public static final String PAGERY_SITE_INFO = PREFIX+"pagery.info";
     public static final String PAGERY_BUILD_INFO = PREFIX+"pagery.buildinfo";
+
+    public static final String PAGERY_MENUS_START = PREFIX+"pagery.menus.start";
+    public static final String PAGERY_MENU_HREF = PREFIX+"pagery.menu.href";
+    public static final String PAGERY_MENU_NAME = PREFIX+"pagery.menu.name";
+    public static final String PAGERY_MENUS_END = PREFIX+"pagery.menus.end";
 
     /**
      * Post wrappers.

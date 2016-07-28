@@ -12,10 +12,7 @@ import com.devbugger.pagery.site.*;
 import java.io.IOException;
 import java.nio.file.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import static com.devbugger.pagery.html.attribute.AttributeType.CHARSET_UTF8;
 import static com.devbugger.pagery.html.attribute.AttributeType.STYLESHEET;
@@ -40,9 +37,9 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
             String name = page.getFontMatterMeta().getTitle();
             String type = page.getFontMatterMeta().getType();
             if(page instanceof IndexPage)
-                menuItems.add(new MenuItem("Home", name+".html"));
+                menuItems.add(new MenuItem("Home", "/"));
             else
-                menuItems.add(new MenuItem(name, type+"/"+name+".html"));
+                menuItems.add(new MenuItem(name, "/"+type+"/"+name+".html"));
         }
 
         basePage.setMenuItems(menuItems);
@@ -63,6 +60,8 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
         return basePage;
     }
 
+    // det skjer noe feil her hvor enten ingenting eller alt returneres
+
     @Override
     public Page attach(BasePage basePage, Page page, List<Page> pages) {
         if(basePage.getContent().contains(PAGERY_CONTENT)) {
@@ -71,33 +70,38 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
         if(page.getContent().contains(PAGERY_HEADER_TITLE)) {
             page.setContent(page.getContent().replace(PAGERY_HEADER_TITLE, page.getFontMatterMeta().getTitle()));
         }
-        if(page.getContent().contains(PAGERY_PAGES)) {
-            page.setContent(page.getContent().replace(PAGERY_PAGES, menu(basePage, page)));
+        if(basePage.getContent().contains(PAGERY_MENUS_START) || basePage.getContent().contains(PAGERY_MENUS_END)) {
+            page.setContent(menu(basePage, page));
         }
 
         return page;
     }
 
     String menu(BasePage basePage, Page page) {
-        StringBuilder builder = new StringBuilder();
+        String input = page.getContent();
+
+        int indexPre = input.indexOf(PAGERY_MENUS_START)+PAGERY_MENUS_START.length();
+        int indexPost = input.indexOf(PAGERY_MENUS_END)+PAGERY_MENUS_END.length();
+
+        // Create copies of the content pre and post markers.
+        String pre = input.substring(0, input.indexOf(PAGERY_MENUS_START));
+        String post = input.substring(indexPost);
+
+        StringBuilder builder = new StringBuilder(pre);
 
         for (MenuItem menuItem : basePage.getMenuItems()) {
+            String output = input.substring(indexPre, input.indexOf(PAGERY_MENUS_END));
 
-            String name = menuItem.getName();
-            String href = menuItem.getHref();
+            if(output.contains(PAGERY_MENU_NAME))
+                output = output.replace(PAGERY_MENU_NAME,
+                        Objects.equals(menuItem.getName(), page.getFontMatterMeta().getTitle()) ? "ACTIVE "+menuItem.getName() : menuItem.getName());
+            if (output.contains(PAGERY_MENU_HREF))
+                output = output.replace(PAGERY_MENU_HREF, menuItem.getHref());
 
-            if (menuItem.getName().equals(page.getFontMatterMeta().getTitle())) {
-                builder.append("\n<a class=\"active\" href=\"/");
-            }
-            else {
-                builder.append("\n<a href=\"/");
-            }
-
-            builder.append(href)
-                    .append("\">")
-                    .append(name)
-                    .append("</a>");
+            builder.append(output);
         }
+
+       builder.append(post);
 
         return builder.toString();
     }

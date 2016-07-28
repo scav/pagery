@@ -16,10 +16,9 @@ files:
       loadOrder: 3
 
 project:
-  title: Pagery Static Blog
+  title: Pagery Developer Blog
   path: http://localhost:8080
-  info: This is a blog about a static blog generator named Pagery.
-          Pagery is on github and other places.
+  info: Developer blog for static blog generator Pagery.
   postlimit: 1 # Amount of posts to show on the frontpage
 
 server:
