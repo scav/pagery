@@ -3,11 +3,6 @@ TODO LIST PAGERY
 =================
 
 
-HASTER: BASEPAGE BØR LA HVER "PAGE" SETTE SIN HREF LINK SOM "ACTIVE"!
-
-IndexPage er en Post? Den bør være en Page!
-
-
 1.  Dynamic CSS tranlsation
 ===========================
     Create dynamic class names for things Pagery create
@@ -23,6 +18,9 @@ IndexPage er en Post? Den bør være en Page!
         pagery-menu-class = <your menu class>
     }
 
+    KNOWN TAGS:
+    id="menu-active"
+
 
 
 2.  HTML Tag as Classes
@@ -35,14 +33,14 @@ IndexPage er en Post? Den bør være en Page!
 
 
 
-3.  parse files based on folder location
+3.  parse build based on folder location
         /posts/post1.md|post2.md|post3.md etc...
         /pages/about.md|contact.md etc...
         /postpage (index)
 
 
 
-4.  connect files together based on metadata
+4.  connect build together based on metadata
         - categories
         - author
         - dates(?)

@@ -1,5 +1,11 @@
+# Pagery Project Configuration
+#
 # Example configuration file for a project.
+#
+#
 
+#
+# All files and how they are combined.
 files:
   suffix: md
   root: /Users/dag/dev/pagery/example/
@@ -15,6 +21,32 @@ files:
     - location: blog.css
       loadOrder: 3
 
+# Adding templates to override or add defaults to tags
+# to make it fit different style sheets.
+#
+# Examples:
+#
+#<tag>@post.title</tag> => <tag class="myClass moreClass">My Title</tag>
+# templates:
+#    post.title:
+#      attribute: class/
+#      values: [myClass, moreClass]
+#
+#<tag>@post.author</tag> => <tag id="myId moreId">An Author</tag>
+# templates:
+#    post.author:
+#      attribute: id
+#      values: [myId, moreId]
+#
+templates:
+  post.title:
+    attribute: class
+    values: [post-title, aheader]
+
+#
+# Pagery Project propertied
+# Properties define the name of the project, the root path, some info text
+# and limits the amount of blog posts the index page will show.
 project:
   title: Pagery Developer Blog
   path: http://localhost:8080

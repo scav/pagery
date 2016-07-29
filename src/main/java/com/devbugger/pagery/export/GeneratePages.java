@@ -48,7 +48,7 @@ public class GeneratePages {
 
         try (DirectoryStream<Path> postStream = Files.newDirectoryStream(Paths.get(
                 config.getFiles().getRoot()+config.getFiles().getPost()), "*."+config.getFiles().getSuffix())) {
-            postStream.forEach(post -> posts.add(transformer.transformPost(post.toAbsolutePath().toString())));
+             postStream.forEach(post -> posts.add(transformer.transformPost(post.toAbsolutePath().toString())));
 
 
         } catch (IOException e) {

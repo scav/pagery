@@ -27,6 +27,7 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     @Override
     public void setTransformMarkdown(TransformMarkdown transformMarkdown) {
         this.transformMarkdown = transformMarkdown;
+        this.transformMarkdown.setConfig(config);
     }
 
     @Override

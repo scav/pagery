@@ -15,7 +15,6 @@ public class PageryYAMLConfig implements PageryConfig{
 
     public PageryYAMLConfig() {
         this.yaml = new Yaml(new Constructor(Config.class));
-        //this.yaml = new Yaml();
     }
 
     @Override
@@ -29,16 +28,4 @@ public class PageryYAMLConfig implements PageryConfig{
         }
         return null;
     }
-
-
-
-//    @Override
-//    public Config read(String path) {
-//        try(InputStream in = Files.newInputStream(Paths.get(path))) {
-//            return yaml.loadAs(in, Config.class);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 }

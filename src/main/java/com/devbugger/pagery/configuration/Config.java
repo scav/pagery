@@ -1,5 +1,7 @@
 package com.devbugger.pagery.configuration;
 
+import java.util.Map;
+
 /**
  * Collects all the config classes providing access to them
  * throughout the application.
@@ -11,6 +13,7 @@ public class Config {
     private Files files;
     private Project project;
     private Server server;
+    private Map<String, Template> templates;
 
     public Files getFiles() {
         return files;
@@ -36,12 +39,21 @@ public class Config {
         this.server = server;
     }
 
+    public Map<String, Template> getTemplates() {
+        return templates;
+    }
+
+    public void setTemplates(Map<String, Template> templates) {
+        this.templates = templates;
+    }
+
     @Override
     public String toString() {
         return "Config{" +
                 "files=" + files +
                 ", project=" + project +
                 ", server=" + server +
+                ", templates=" + templates +
                 '}';
     }
 }
