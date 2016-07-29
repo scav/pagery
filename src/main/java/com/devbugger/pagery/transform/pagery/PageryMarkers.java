@@ -27,6 +27,7 @@ public class PageryMarkers {
     public static final String PAGERY_MENUS_START = PREFIX+"pagery.menus.start";
     public static final String PAGERY_MENU_HREF = PREFIX+"pagery.menu.href";
     public static final String PAGERY_MENU_NAME = PREFIX+"pagery.menu.name";
+    public static final String PAGERY_MENU_ACTIVE = PREFIX+"pagery.menu.active";
     public static final String PAGERY_MENUS_END = PREFIX+"pagery.menus.end";
 
     /**

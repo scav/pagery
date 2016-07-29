@@ -2,10 +2,7 @@ package com.devbugger.pagery.transform.pagery;
 
 import com.devbugger.pagery.configuration.Config;
 import com.devbugger.pagery.configuration.Resource;
-import com.devbugger.pagery.html.attribute.Charset;
-import com.devbugger.pagery.html.attribute.Href;
-import com.devbugger.pagery.html.attribute.Rel;
-import com.devbugger.pagery.html.attribute.Type;
+import com.devbugger.pagery.html.attribute.*;
 import com.devbugger.pagery.html.element.Link;
 import com.devbugger.pagery.site.*;
 
@@ -36,8 +33,10 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
         for (Page page : pages) {
             String name = page.getFontMatterMeta().getTitle();
             String type = page.getFontMatterMeta().getType();
-            if(page instanceof IndexPage)
-                menuItems.add(new MenuItem("Home", "/"));
+            if(page instanceof IndexPage) {
+                continue;
+            }
+
             else
                 menuItems.add(new MenuItem(name, "/"+type+"/"+name+".html"));
         }
@@ -93,10 +92,14 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
             String output = input.substring(indexPre, input.indexOf(PAGERY_MENUS_END));
 
             if(output.contains(PAGERY_MENU_NAME))
-                output = output.replace(PAGERY_MENU_NAME,
-                        Objects.equals(menuItem.getName(), page.getFontMatterMeta().getTitle()) ? "ACTIVE "+menuItem.getName() : menuItem.getName());
-            if (output.contains(PAGERY_MENU_HREF))
+                output = output.replace(PAGERY_MENU_NAME, menuItem.getName());
+            if (output.contains(PAGERY_MENU_HREF)) {
+                if(page.getFontMatterMeta().getTitle().equals(menuItem.getName())) {
+                    output = output.replace(PAGERY_MENU_ACTIVE, new Attribute("id", "menu-active").get());
+                }
                 output = output.replace(PAGERY_MENU_HREF, menuItem.getHref());
+            }
+
 
             builder.append(output);
         }
@@ -105,6 +108,7 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
 
         return builder.toString();
     }
+
 
     /**
      * Generate the menu from a list of existing pages.
