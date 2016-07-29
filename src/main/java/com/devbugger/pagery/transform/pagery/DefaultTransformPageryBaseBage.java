@@ -59,8 +59,6 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
         return basePage;
     }
 
-    // det skjer noe feil her hvor enten ingenting eller alt returneres
-
     @Override
     public Page attach(BasePage basePage, Page page, List<Page> pages) {
         if(basePage.getContent().contains(PAGERY_CONTENT)) {
@@ -95,7 +93,10 @@ public class DefaultTransformPageryBaseBage implements TransformPageryBasePage<B
                 output = output.replace(PAGERY_MENU_NAME, menuItem.getName());
             if (output.contains(PAGERY_MENU_HREF)) {
                 if(page.getFontMatterMeta().getTitle().equals(menuItem.getName())) {
-                    output = output.replace(PAGERY_MENU_ACTIVE, new Attribute("id", "menu-active").get());
+                    output = output.replace(PAGERY_MENU_ACTIVE, "menu-active");
+                }
+                else {
+                    output = output.replace(PAGERY_MENU_ACTIVE, "");
                 }
                 output = output.replace(PAGERY_MENU_HREF, menuItem.getHref());
             }
