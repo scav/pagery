@@ -1,6 +1,5 @@
 package com.devbugger.pagery.transform.pagery;
 
-import com.devbugger.pagery.html.attribute.css.CSSClass;
 import com.devbugger.pagery.html.element.AHref;
 import com.devbugger.pagery.site.Post;
 
@@ -10,7 +9,7 @@ import static com.devbugger.pagery.transform.pagery.PageryMarkers.*;
 
 public class TransformPageryPost implements TransformPagery<Post> {
 
-    public static final String CATEGORY_SEPARATOR = " ";
+    static final String CATEGORY_SEPARATOR = " ";
 
     @Override
     public Post transform(Post post) {
@@ -20,10 +19,7 @@ public class TransformPageryPost implements TransformPagery<Post> {
             input = input.replace(POST_TITLE,
                     new AHref(post.getFontMatterMeta().getTitle(),
                             post.getFontMatterMeta().getType(), post.getFontMatterMeta().getTitle())
-                            .attributes(new CSSClass("post-title"))
                             .get());
-                    //"<a href=\"/"+post.getFontMatterMeta().getType()+"/"+post.getFontMatterMeta().getTitle()+".html\">"+
-                    //        post.getFontMatterMeta().getTitle()+"</a>");
         if(input.contains(POST_AUTHOR)) {
             input = input.replace(POST_AUTHOR, post.getFontMatterMeta().getAuthor());
         }
