@@ -1,9 +1,7 @@
 package com.devbugger.pagery.transform;
 
 import com.devbugger.pagery.FileUtils;
-import com.devbugger.pagery.TestData;
 import com.devbugger.pagery.configuration.PageryYAMLConfig;
-import com.devbugger.pagery.export.ExportHtml;
 import com.devbugger.pagery.site.BasePage;
 import com.devbugger.pagery.site.Page;
 import com.devbugger.pagery.site.Post;
@@ -17,8 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +30,7 @@ public class DefaultTransformerTest {
     @Before
     public void setup() {
         transformer = new DefaultTransformer();
-        transformer.setConfig(new PageryYAMLConfig().read("example/config.yaml"));
+        transformer.setConfig(new PageryYAMLConfig().read(new FileUtils().generatePath("test-config.yaml")));
         transformer.setTransformFontMatter(new TransformFontMatter());
         transformer.setTransformMarkdown(new TransformMarkdown());
     }

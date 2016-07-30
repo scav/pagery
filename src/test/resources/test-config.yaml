@@ -1,0 +1,54 @@
+# Pagery Project Configuration
+#
+# Example configuration file for a project.
+# All projects must have this file and most of the root properties
+# are necessary for a project to build an actual web page.
+
+#
+# All files and how they are combined.
+files:
+  suffix: md
+  root: /Users/dag/dev/pagery/example/
+  post: post
+  page: page
+  resource: resources/
+  target: /Users/dag/dev/pagery/pagery-out/
+  resources: # Set up the CSS resources that needs a load order. Any resource listed will be given a random order.
+    - location: pure-min.css
+      loadOrder: 1
+    - location: grids-responsive-min.css
+      loadOrder: 2
+    - location: blog.css
+      loadOrder: 3
+
+# Adding templates to override or add defaults to tags
+# to make it fit different style sheets.
+#
+# Examples:
+#
+#<tag>@post.title</tag> => <tag class="myClass moreClass">My Title</tag>
+# templates:
+#    post.title:
+#      attribute: class/
+#      values: [myClass, moreClass]
+#
+#<tag>@post.author</tag> => <tag id="myId moreId">An Author</tag>
+# templates:
+#    post.author:
+#      attribute: id
+#      values: [myId, moreId]
+#
+templates:
+  post.title:
+    attribute: class
+    values: [post-title, aheader]
+
+#
+# Pagery Project propertied
+# Properties define the name of the project, the root path, some info text
+# and limits the amount of blog posts the index page will show.
+project:
+  title: Pagery Developer Blog
+  path: http://localhost:8080
+  info: Developer blog for static blog generator Pagery.
+  postlimit: 1 # Amount of posts to show on the frontpage

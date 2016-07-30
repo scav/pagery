@@ -7,6 +7,10 @@ import java.nio.file.Paths;
 
 public class FileUtils {
 
+    public String generatePath(String name) {
+        return this.getClass().getClassLoader().getResource(name).getFile();
+    }
+
     public String generate(String name) {
         return generate(Paths.get(this.getClass().getClassLoader().getResource(name).getFile()));
     }
