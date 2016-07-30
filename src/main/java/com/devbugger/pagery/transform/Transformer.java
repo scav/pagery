@@ -16,41 +16,47 @@ public interface Transformer extends PageryConfigSupport {
     void setTransformMarkdown(TransformMarkdown transformMarkdown);
     void setTransformFontMatter(TransformFontMatter transformFontMatter);
 
-
-    IndexPage transformIndexPage(String path, List<Post> posts);
+    /**
+     * Generate the index page that will become index.html at the
+     * root of the project.
+     * @param content string representation of index page
+     * @param posts available for listing at the index page
+     * @return a complete basic page
+     */
+    IndexPage transformIndexPage(String content, List<Post> posts);
 
     /**
      * Generate the basic layout that all pages will inherit when
      * they are created.
-     * @param path location of base page
+     * @param content string representation of base page
      * @param pages to be included in the menu
      * @return a complete basic page
      */
-    BasePage transformBasePage(String path, List<Page> pages);
+    BasePage transformBasePage(String content, List<Page> pages);
 
     /**
      * Transforms a page by accepting its file location.
      * This method takes care of everything and places the page
      * in a stack of pages that will be used to do the final transformation.
-     * @param path to file location
+     * @param content string representation of page
      * @return a complete page
      */
-    Page transformPage(String path);
+    Page transformPage(String content);
 
     /**
      * Transforms a page containing all posts.
-     * @param path to the post page template
+     * @param content string representation of post page
      * @param posts all posts to add to the post page
      * @return a complete post page ready for writing
      */
-    PostPage transformPostPage(String path, List<Post> posts);
+    PostPage transformPostPage(String content, List<Post> posts);
 
     /**
      * Transforms one post ready to be written.
-     * @param path to the post template
+     * @param content string representation of post
      * @return a complete post ready for writing
      */
-    Post transformPost(String path);
+    Post transformPost(String content);
 
 
 }

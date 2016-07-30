@@ -13,7 +13,7 @@ import java.util.List;
  *
  * This class exposes all available functionality outside of its package.
  */
-public class DefaultTransformer implements Transformer, TransformerFileUtils {
+public class DefaultTransformer implements Transformer {
 
     private Config config;
     private TransformMarkdown transformMarkdown;
@@ -36,10 +36,9 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     }
 
     @Override
-    public IndexPage transformIndexPage(String path, List<Post> posts) {
+    public IndexPage transformIndexPage(String content, List<Post> posts) {
         TransformPageryWithResources<IndexPage, Post> transformPagery = new TransformPageryIndexPage();
         transformPagery.setConfig(config);
-        String content = generate(path);
 
         IndexPage indexPage = new IndexPage(transformFontMatter.create(content));
         indexPage.setContent(transformFontMatter.stripFontMatter(content));
@@ -48,20 +47,19 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     }
 
     @Override
-    public BasePage transformBasePage(String path, List<Page> pages) {
+    public BasePage transformBasePage(String content, List<Page> pages) {
         TransformPageryBasePage<BasePage, Page> transformPagery = new DefaultTransformPageryBaseBage();
         transformPagery.setConfig(config);
 
         BasePage basePage = new BasePage();
-        basePage.setContent(generate(path));
+        basePage.setContent(content);
 
         return transformPagery.transform(config, basePage, pages);
     }
 
     @Override
-    public Page transformPage(String path) {
+    public Page transformPage(String content) {
         TransformPagery<Page> transformPagery = new TransformPageryPage();
-        String content = generate(path);
 
         Page page = new Page(transformFontMatter.create(content));
         content = transformFontMatter.stripFontMatter(content);
@@ -71,9 +69,8 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     }
 
     @Override
-    public PostPage transformPostPage(String path, List<Post> posts) {
+    public PostPage transformPostPage(String content, List<Post> posts) {
         TransformPageryWithResources<PostPage, Post> transformPagery = new TransformPageryPostPage();
-        String content = generate(path);
 
         PostPage postPage = new PostPage(transformFontMatter.create(content));
         postPage.setContent(transformFontMatter.stripFontMatter(content));
@@ -82,9 +79,8 @@ public class DefaultTransformer implements Transformer, TransformerFileUtils {
     }
 
     @Override
-    public Post transformPost(String path) {
+    public Post transformPost(String content) {
         TransformPageryPost transformPagery = new TransformPageryPost();
-        String content = generate(path);
 
         Post post = new Post(transformFontMatter.create(content));
         content = transformFontMatter.stripFontMatter(content);
