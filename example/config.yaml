@@ -1,8 +1,8 @@
 # Pagery Project Configuration
 #
 # Example configuration file for a project.
-#
-#
+# All projects must have this file and most of the root properties
+# are necessary for a project to build an actual web page.
 
 #
 # All files and how they are combined.
@@ -53,6 +53,10 @@ project:
   info: Developer blog for static blog generator Pagery.
   postlimit: 1 # Amount of posts to show on the frontpage
 
+#
+# Development server properties.
+# These properties can be used to override the default properties
+# of the server instance (localhost:8080 is default).
 server:
   name: localhost
   host: localhost

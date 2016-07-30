@@ -13,7 +13,7 @@ in @post.categories
 
 @post.lead.start
 Pagery is a Java based static web page generator created with the goal
-of not using any regex besides the standard Java API's.
+of not using any regex besides the standard Java API's and some libraries.
 @post.lead.end
 
 *no longer part of the lead start*
