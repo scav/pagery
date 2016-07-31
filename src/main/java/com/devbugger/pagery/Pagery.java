@@ -2,7 +2,11 @@ package com.devbugger.pagery;
 
 public class Pagery {
 
-    static void main(String[] args) {
-
+    public static void main(String[] args) {
+        if(args.length == 0) {
+            PageryDefault pageryDefault = new PageryDefault();
+            pageryDefault.generate();
+            pageryDefault.server();
+        }
     }
 }

@@ -1,36 +1,10 @@
 
 TODO LIST PAGERY
 =================
+DefaultTransformer.class -
 
-
-1.  Dynamic CSS tranlsation
-===========================
-    Create dynamic class names for things Pagery create
-    that can be defined in a config file.
-
-    Basically, it lets users translate common html elements
-    to a format that pagery understands. Pagery will replace its own
-    tags with the overwrite rules defined in this config.
-
-    css-classes.configuration {
-        pagery-post-title-class = <your title class>
-        pagery-post-title-a-href-class = <your title class>
-        pagery-menu-class = <your menu class>
-    }
-
-    KNOWN TAGS:
-    id="menu-active"
-
-
-
-2.  HTML Tag as Classes
-=======================
-    Create classes for all html elements used by Pagery.
-    These classes provide a typesafe way of adding html tags inside
-    of the transformers.
-
-    public class AHref(location: string, template.html: string)
-
+Use String of content instead of path pointing to content.
+    Enables easier testing as well as more safety.
 
 
 3.  parse build based on folder location

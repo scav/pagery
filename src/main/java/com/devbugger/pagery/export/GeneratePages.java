@@ -75,7 +75,7 @@ public class GeneratePages implements TransformerFileUtils {
         TransformPageryBasePage<BasePage, Page> base = new DefaultTransformPageryBaseBage();
         pages.forEach(p -> p = base.attach(basePage, p, pages));
 
-        ExportHtml exportHtml = new ExportHtml();
+        ExportHtml exportHtml = new ExportHtml(config);
         pages.forEach(exportHtml::write);
     }
 

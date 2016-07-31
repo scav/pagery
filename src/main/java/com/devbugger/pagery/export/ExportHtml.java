@@ -1,6 +1,8 @@
 package com.devbugger.pagery.export;
 
 
+import com.devbugger.pagery.configuration.Config;
+import com.devbugger.pagery.configuration.PageryConfigSupport;
 import com.devbugger.pagery.site.IndexPage;
 import com.devbugger.pagery.site.Page;
 
@@ -15,20 +17,31 @@ import java.nio.file.Paths;
  */
 public class ExportHtml {
 
+    private Config config;
+
     private final static String OPERATOR = "@";
-    private final static String ROOT_DIR = "pagery-out/"+OPERATOR+".html";
+    private final String ROOT_DIR;// = "pagery-out/"+OPERATOR+".html";
+
+    public ExportHtml(Config config) {
+        this.config = config;
+        ROOT_DIR = config.getFiles().getTarget()+"/"+OPERATOR+".html";
+    }
 
     private Path createFile(String name) {
+        String target = config.getFiles().getTarget();
         try {
             // Create all files for testing purposes.
-            Files.createDirectories(Paths.get("pagery-out"));
-            Files.createDirectories(Paths.get("pagery-out/resources"));
-            Files.createDirectories(Paths.get("pagery-out/page"));
-            Files.createDirectories(Paths.get("pagery-out/post"));
-            Files.createDirectories(Paths.get("pagery-out/postpage"));
+            Files.createDirectories(Paths.get(target));
+            Files.createDirectories(Paths.get(target+"/resources"));
+            Files.createDirectories(Paths.get(target+"/page"));
+            Files.createDirectories(Paths.get(target+"/post"));
+            Files.createDirectories(Paths.get(target+"/postpage"));
             Files.deleteIfExists(Paths.get(name));
+            System.out.println("Name: " + name);
+            System.out.println("Target: " + target);
             return Files.createFile(Paths.get(name));
         } catch (IOException e) {
+            System.out.println("Target: " + target);
             e.printStackTrace();
         }
 

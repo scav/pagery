@@ -8,11 +8,11 @@
 # All files and how they are combined.
 files:
   suffix: md
-  root: /Users/dag/dev/pagery/example/
+  root: example/
   post: post
   page: page
   resource: resources/
-  target: /Users/dag/dev/pagery/pagery-out/
+  target: pagery-out/
   resources: # Set up the CSS resources that needs a load order. Any resource listed will be given a random order.
     - location: pure-min.css
       loadOrder: 1

@@ -8,8 +8,10 @@ task wrapper(type: Wrapper) {
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'application'
 
 sourceCompatibility = 1.8
+mainClassName = "com.devbugger.pagery.Pagery"
 
 repositories {
     mavenCentral()
