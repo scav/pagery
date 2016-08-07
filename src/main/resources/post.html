@@ -1,0 +1,28 @@
+---
+title: Posts
+type: postpage
+author: Dag
+date: 2016-07-24 10:15:30
+info: this is the page containing all posts.
+---
+
+<div class="posts">
+    <h1 class="content-subhead">Recent Posts</h1>
+    @post.all
+    <section class="post">
+        <header class="post-header">
+            <img class="post-avatar" alt="@post.author&#x27;s avatar" height="48" width="48" src="">
+            <h2>@post.title</h2>
+            <p class="post-meta">
+            By <a class="post-author" href="#">@post.author</a> under
+                <a class="post-category post-category-js" href="#">JavaScript</a>
+            </p>
+        </header>
+        <div class="post-description">
+            <p>
+            @post.lead
+            </p>
+        </div>
+    </section>
+    @post.end
+</div>

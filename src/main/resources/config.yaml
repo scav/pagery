@@ -1,0 +1,66 @@
+###
+# This is the default Pagery project configuration.
+#
+# This file can be changed and updated as necessary.
+# All projects must have this file and most of the root properties
+# are necessary for a project to build an actual web page.
+##
+#
+
+# Files defines file based resources and properties
+# regarding different files.
+files:
+  suffix: md
+  root: example/
+  post: post
+  page: page
+  target: pagery-out/
+  resource: resources/
+  resources: # Set up the CSS resources that needs a load order. Any resource listed will be given a random order.
+    - location: pure-min.css
+      loadOrder: 1
+    - location: grids-responsive-min.css
+      loadOrder: 2
+    - location: blog.css
+      loadOrder: 3
+
+# Adding templates to override or add defaults to tags
+# to make it fit different style sheets.
+# These will only transform Markdown content. Html based
+# content is intended to be edited manually.
+#
+# Examples:
+#
+#<tag>@post.title</tag> => <tag class="myClass moreClass">My Title</tag>
+# templates:
+#    post.title:
+#      attribute: class/
+#      values: [myClass, moreClass]
+#
+#<tag>@post.author</tag> => <tag id="myId moreId">An Author</tag>
+# templates:
+#    post.author:
+#      attribute: id
+#      values: [myId, moreId]
+#
+templates:
+  post.title:
+    attribute: class
+    values: [post-title]
+
+# Pagery Project propertied
+# Properties define the name of the project, the root path, some info text
+# and limits the amount of blog posts the index page will show.
+project:
+  title: Pagery Developer Blog
+  path: http://localhost:8080
+  info: Developer blog for static blog generator Pagery.
+  postlimit: 1 # Amount of posts to show on the frontpage
+
+# Development server properties.
+# These properties can be used to override the default properties
+# of the server instance (localhost:8080 is default).
+server:
+  name: localhost
+  host: localhost
+  port: 8080
